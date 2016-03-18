@@ -1,0 +1,25 @@
+{
+  "nodes":[
+    {"name":"Mohamed","type":"CEO"},
+    {"name":"Google.Inc","type":"Company"},
+    {"name":"Apple","type":"Company"},
+    {"name":"Leonardo Decaprio","CEO":"1"},
+    {"name":"Prisoner A","type":"Prisoner"},
+    {"name":"National Bank of Hakuna","type":"Bank"},
+    {"name":"Shanghai Major Bank","type":"Bank"},
+    {"name":"Boeing 747","type":"Vessel"},
+    {"name":"Company Ltd.","type":"Company"},
+  ],
+"links":[
+    {"source":0,"target":1,"value":1},
+    {"source":1,"target":3,"value":1},
+    {"source":2,"target":0,"value":8},
+    {"source":3,"target":0,"value":10},
+    {"source":3,"target":2,"value":6},
+    {"source":3,"target":4,"value":1},
+    {"source":5,"target":0,"value":1},
+    {"source":6,"target":0,"value":1},
+    {"source":7,"target":0,"value":1},
+    {"source":8,"target":0,"value":2},
+    {"source":3,"target":1,"value":1}
+]}
