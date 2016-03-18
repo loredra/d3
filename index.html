@@ -12,12 +12,18 @@
 <!-- CSS Style //-->
 <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900|Source+Code+Pro:300" rel="stylesheet" type="text/css">
 <link href="style.css" rel="stylesheet" type="text/css">
+<style> rect{
+  stroke-width: 1;
+  stroke: blue;
+
+}
+</style> 
 
 <script>
 /* GLOBALS */
 
 var width  = 960;           // width of svg image
-var height = 500;           // height of svg image
+var height = 600;           // height of svg image
 var margin = 20;            // amount of margin around plot area
 var pad = margin / 2;       // actual padding amount
 var radius = 4;             // fixed node radius
@@ -31,6 +37,7 @@ function addTooltip(image) {
     var y = parseFloat(image.attr("y"));
     var r = parseFloat(image.attr("r"));
     var h = parseFloat(image.attr("height"));
+    if(h==48) h=24;
     var w = parseFloat(image.attr("width"));
     var text = image.attr("id");
 
@@ -38,7 +45,7 @@ function addTooltip(image) {
         .append("text")
         .text(text)
         .attr("x", x+w/2)
-        .attr("y", y+20+h)
+        .attr("y", y+40+h)
         .attr("dy", -r * 2)
         .attr("id", "tooltip");
 
@@ -68,12 +75,12 @@ function arcDiagram(graph) {
         .attr("id", "arc")
         .attr("width", width)
         .attr("height", height);
-
-    // draw border around svg image
-    // svg.append("rect")
-    //     .attr("class", "outline")
-    //     .attr("width", width)
-    //     .attr("height", height);
+    root="";
+     
+  //    svg.append("rect")
+     //     .attr("class", "outline")
+    //      .attr("width", width)
+    //      .attr("height", height);
 
     // create plot area within svg image
     var plot = svg.append("g")
@@ -130,16 +137,41 @@ function drawNodes(nodes) {
         .attr("x", function(d, i) { return d.x-10; })
         .attr("y", function(d, i) { return d.y; })
         .style("fill",   function(d, i) { return color(d.group); })
-        .on("mouseover", function(d, i) { addTooltip(d3.select(this));})
+        .on("mouseover", function(d, i) {
+        scaleImage(d3.select(this));
+        addTooltip(d3.select(this));
+       })
         //.on("click", function(){click(this);})
         .on("click", click)
         .on("dblclick", dblclick)
-        .on("mouseout",  function(d, i) { d3.select("#tooltip").remove(); })
+        .on("mouseout",  function(d, i) { d3.select("#tooltip").remove();
+        reScaleImage(d3.select(this));
+        })
 	.attr("width", "24px")
 	.attr("height", "24px");
 }
-function click(node) {
+function scaleImage(node){
 
+node.transition()
+        .duration(750)
+        .attr("x", function(d, i) { return d.x-24; })
+        .attr("width", "48px")
+	.attr("height", "48px")
+        .style("fill", "lightsteelblue");
+  
+}
+function reScaleImage(node){
+if (node.attr("id")===root.name) return; 
+else{
+node.transition()
+   	.duration(750)
+        .attr("x", function(d, i) { return d.x-8; })
+        .attr("width", "24px")
+	.attr("height", "24px")
+        .style("fill", "lightsteelblue");
+        }
+}
+function click(node) {
 d3.select("#plot").selectAll(".node").transition()
 	.duration(750)
         .attr("x", function(d, i) { return d.x-8; })
@@ -147,12 +179,14 @@ d3.select("#plot").selectAll(".node").transition()
 	.attr("height", "24px")
         .style("fill", "lightsteelblue");
 
+        root=node;
 d3.select(this).transition()
         .duration(750)
         .attr("x", function(d, i) { return d.x-24; })
         .attr("width", "48px")
 	.attr("height", "48px")
         .style("fill", "lightsteelblue");
+        
         
 
         
@@ -174,6 +208,10 @@ d3.select("#plot").selectAll(".node").transition()
         .attr("width", "24px")
 	.attr("height", "24px")
         .style("fill", "lightsteelblue");
+        
+d3.select("#plot").selectAll(".link")
+.style("stroke", "lightsteelblue")
+.style("stroke-opacity",1);
 }
 
 function neighboring(a, b) {
@@ -182,7 +220,6 @@ function neighboring(a, b) {
         || (d.source === b && d.target === a);
   });
 }
-
 
 // Draws nice arcs for each link on plot
 function drawLinks(links) {

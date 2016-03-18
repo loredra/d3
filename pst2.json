@@ -1,0 +1,28 @@
+{
+  "nodes":[
+    {"id":"0", "name":"ETCO INTERNATIONAL COMMODITIES LIMITED","type":"Company","trust":50},
+    {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":50},
+    {"id": "2","name":"DIAZ ALFONSO, Liudis","type":"human","trust":50},
+    {"id": "3","name":"PEREZ GUILLAMA, Osmani De La Caridad","type":"human","trust":50},
+    {"id": "4","name":"RODRIGUEZ DELGADO, Minerva Aleida","type":"human","trust":50},
+    {"id": "5","name":"WILSON GREEN PROPERTY LIMITED","type":"Company","trust":50},
+    {"id": "6","name":"WATSON, Caroline","type":"human","trust":50},
+    {"id": "7","name":"UK GLOBAL COMMODITIES LIMITED","type":"Company","trust":50},
+    {"id": "8","name":"ALL WORLD FOODS LIMITED","type":"Company","trust":50},
+    {"id": "9","name":"DA SILVA, Jose Antonio Goncalves","type":"human","trust":50},
+    {"id": "10","name":"MUSSI VAZQUEZ, Eidel Manuel","type":"human","trust":50}
+     ],
+"links":[
+{"source":1,"target":0,"linktype":"Secretary"},
+{"source":1,"target":0,"linktype":"Director"},
+{"source":2,"target":0,"linktype":"Director"},
+{"source":3,"target":0,"linktype":"Director"},
+{"source":4,"target":0,"linktype":"Director"},
+{"source":1,"target":5,"linktype":"Director"},
+{"source":6,"target":5,"linktype":"Director"},
+{"source":1,"target":7,"linktype":"Secretary"},
+{"source":2,"target":7,"linktype":"Director"},
+{"source":1,"target":8,"linktype":"Resigned"},
+{"source":9,"target":8,"linktype":"Secretary"},
+{"source":10,"target":8,"linktype":"Director"}
+]}

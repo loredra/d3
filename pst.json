@@ -10,6 +10,17 @@
     {"name":"Boeing 747","type":"Boat"},
     {"name":"Company Ltd.","type":"Company"},
     {"name":"Shanghai Major Bank","type":"Bank"},
+    {"name":"Boeing 747","type":"Boat"},
+    {"name":"Mohamed","type":"CEO"},
+    {"name":"Google.Inc","type":"Company"},
+    {"name":"Apple","type":"Company"},
+    {"name":"Leonardo Decaprio","type":"CEO"},
+    {"name":"Prisoner A","type":"Prisoner"},
+    {"name":"National Bank of Hakuna","type":"Bank"},
+    {"name":"Shanghai Major Bank","type":"Bank"},
+    {"name":"Boeing 747","type":"Boat"},
+    {"name":"Company Ltd.","type":"Company"},
+    {"name":"Shanghai Major Bank","type":"Bank"},
     {"name":"Boeing 747","type":"Boat"}
   ],
 "links":[

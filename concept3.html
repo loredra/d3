@@ -2,6 +2,57 @@
 <meta charset="utf-8">
 <style>
 
+#header{
+  background-color: green;
+  height: 70px;
+  text-align: center;
+}
+
+#profile_of_node{
+  background-color: blue;
+  height: 110px;
+  margin-bottom:26px;
+  text-align: center;
+}
+.associate_info_node{
+border-radius: 5px;
+margin: 2px 10px;
+width: 720px;
+max-width: 720px;
+margin: 0px auto;
+padding: 5px;
+flex:1;
+}
+#associate_info{
+max-width: 1440px;
+margin: 0px auto;
+padding: 10px;
+margin-bottom:50px;
+text-align: left;
+display: flex;
+flex-basis: 100%;
+background-color: white;
+box-sizing: border-box;
+border:1px #d6dfe6;
+border-style: solid;
+}
+.line_by_line{
+height: 50%;
+box-sizing: border-box;
+border:1px #d6dfe6;
+border-style: solid;
+resize: both;
+}
+
+body{
+  background-color: #d3d3d3;
+}
+.text{
+
+}
+.svg{
+background-color: #FFFFFF;
+}
 .node {
   stroke: #fff;
   stroke-width: 1.5px;
@@ -9,124 +60,43 @@
 
 .link {
   stroke: #999;
-  stroke-opacity: .6;
+  stroke-opacity: .8;
 }
-
+.d3-tip {
+  line-height: 1;
+  font-weight: bold; 	
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #ff1;
+  border-radius: 23px;
+}
+.text_svg{
+font-size: 10px;
+cursor: default;
+webkit-touch-callout: none;
+webkit-user-select: none;
+khtml-user-select: none;
+moz-user-select: none;
+ms-user-select: none;
+user-select: none;
+}
 </style>
+<script type="text/javascript"src="d3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <body>
-<script src="d3.min.js"></script>
-<script>
-
-var width = 960,
-    height = 500;
-    
-var margin = {top: -5, right: -5, bottom: -5, left: -5};
-
-var color = d3.scale.category20();
-
-var force = d3.layout.force()
-    .charge(-1000)
-    .linkDistance(80)
-    .gravity(.05)
-    .size([width, height]);
-    
- var drag = force.drag()
-.origin(function(d) { return d; })
-.on("dragstart", dragstarted)
-.on("drag", dragged)
-.on("dragend", dragended);
-    
-var zoom = d3.behavior.zoom()
-    .scaleExtent([0.1, 10])
-    .on("zoom", zoomed);
-    
-
-var svg = d3.select("body").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .call(zoom);
-  
-var container = svg.append("g");
-
-function zoomed() {
-  container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
-}
-function dragstarted(d) {
-   d3.event.sourceEvent.stopPropagation();
-   d3.select(this).classed("dragging", true);
-}
-
-function dragged(d) {
-   d3.select(this).attr("x", d.x = d3.event.x).attr("y", d.y = d3.event.y);
-}
-
-function dragended(d) {
-   d3.select(this).classed("dragging", false);
-}
-    
-    
-d3.json("pst.json", function(error, graph) {
-  if (error) throw error;
-  
-   root=graph.nodes[0];
-    root.x = width / 2;
-    root.y = height / 2;
-    root.fixed = true;
- 
-
-  var link = container.append("g").selectAll(".link")
-      .data(graph.links)
-    .enter().append("line")
-      .attr("class", "link")
-      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
-
-  var node = container.append("g").selectAll(".node")
-      .data(graph.nodes)
-      .enter()
-      .append("image")
-      .attr("xlink:href",function(d){return d.type+ ".svg" ;})
-      .attr("class", "node")
-      .attr("x", function(d) { return d.x+12; })
-      .attr("y", function(d) { return d.y+12; })
-      .attr("width", "24px")
-      .attr("height", "24px")
-      .call(force.drag)
-      .on("click",click);
-      
-   
-  force
-      .nodes(graph.nodes)
-      .links(graph.links)
-      .start(); 
-    
-  node.append("title")
-      .text(function(d) { return d.name; });
-      
-  function click(node) {
-     force
-    .stop();
-   root.fixed = false;
-   root=node;
-    root.x = width / 2;
-    root.y = height / 2;
-    root.fixed=true;
-
-   force
-    .start();
-}
-
-  force.on("tick", function() {
-    link.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
-
-    node.attr("x", function(d) { return d.x-12; })
-	 .attr("y", function(d) { return d.y-12; });
-    
-
-
-  });
-});
-
-</script>
+<div id="header" class=header> This is Header</div>
+<div id="main_layout" class=layout>
+    <div id="profile_of_node" class=profile>This is profile</div>
+    <div id="associate_info" class=associate_info>
+	<div id="associate_info_node" class=associate_info_node>This is node detail
+	  <div id="detail_info" class=line_by_line>This is a list of node</div>
+	  <div id="list" class=line_by_line>This is a list of node</div>
+	</div>
+	<div id="visualization" class=associate_info_node>
+	<script type="text/javascript"src="concep3_forcelayout.js"></script>
+	<script type="text/javascript"src="detail.js"></script>
+	</div>
+    </div>
+  </div>
+</div>
+</body>
