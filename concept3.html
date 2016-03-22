@@ -37,6 +37,7 @@ border:1px #d6dfe6;
 border-style: solid;
 }
 .line_by_line{
+overflow-y:auto;
 height: 50%;
 box-sizing: border-box;
 border:1px #d6dfe6;
@@ -51,7 +52,7 @@ body{
 
 }
 .svg{
-background-color: #FFFFFF;
+background-color:  #eaf0fa;
 }
 .node {
   stroke: #fff;
@@ -70,6 +71,18 @@ background-color: #FFFFFF;
   color: #ff1;
   border-radius: 23px;
 }
+ul{
+  padding-left: 3px;
+  list-style-type: none;
+  
+}
+ul li {
+  cursor:pointer;
+  display: block;
+  background: #cce5ff;
+  margin: 5px;
+    list-style-type: none;
+}
 .text_svg{
 font-size: 10px;
 cursor: default;
@@ -81,8 +94,10 @@ ms-user-select: none;
 user-select: none;
 }
 </style>
+<head>
 <script type="text/javascript"src="d3.min.js"></script>
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+</head>
 <body>
 <div id="header" class=header> This is Header</div>
 <div id="main_layout" class=layout>

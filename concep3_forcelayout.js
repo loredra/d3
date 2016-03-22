@@ -1,7 +1,7 @@
 var width = 720,
     height =750;
       
-  var margin = {top: -5, right: -5, bottom: -5, left: -5};
+var margin = {top: -5, right: -5, bottom: -5, left: -5};
   
 //   var tip = d3.tip()
 //   .attr('class', 'd3-tip')
@@ -17,10 +17,10 @@ var width = 720,
 //   .html(function(d) {
 //     return "<strong>Frequency:</strong> <span style='color:red'>" + "20" + "</span>";
 //   })
-
+  var isChosen=0;
   var force = d3.layout.force()
       .charge(-1700)
-      .linkDistance(70)
+      .linkDistance(90)
       .size([width, height]);
       
   var drag = force.drag()
@@ -81,6 +81,17 @@ var width = 720,
     d3.select(this).classed("dragging", false);
     
   }
+ 
+   function translateBeforeChose(x,y){
+  var dcx = (width/2-x*zoom.scale());
+  var dcy = (height/2-y*zoom.scale());
+  zoom.translate([dcx,dcy]);
+  container
+    .transition()
+    .duration(750)
+    .attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
+    
+  }
       
       
   d3.json("pst2.json", function(error, graph) {
@@ -120,10 +131,11 @@ var width = 720,
 	.append("image")
 	.attr("xlink:href",function(d){return d.type+ ".svg" ;})
 	.attr("class", "node")
-	.attr("x", function(d) { return d.x+12; })
-	.attr("y", function(d) { return d.y+12; })
-	.attr("width", "24px")
-	.attr("height", "24px")
+	.attr("x", function(d) { return d.x; })
+	.attr("y", function(d) { return d.y; })
+	.attr("width", function(d) { return "24px" })
+	.attr("height",function(d) { return "24px" })
+	.attr("isChosen", "no")
 	.call(force.drag)
 	.on("mouseover",mouseover)
 	.on("mouseout",mouseout)
@@ -164,18 +176,33 @@ var width = 720,
     function click(node) {
     //root.fixed = false;
     
-
-    if (d3.event.defaultPrevented) return; 
-      
-  var dcx = (width/2-node.x*zoom.scale());
-  var dcy = (height/2-node.y*zoom.scale());
-  zoom.translate([dcx,dcy]);
-  container
-    .transition()
-    .duration(750)
-      .attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
-
+  if (d3.event.defaultPrevented) return; 
+	  d3.selectAll(".node")
+	.attr("width", "24px")
+	.attr("height", "24px")	;
+	  
+   translateBeforeChose(node.x,node.y);
+    
+  d3.select(this)
+	.attr("isChosen", "yes")
+	.transition()
+        .duration(750)
+	.attr("x", function(d) {return d.x-24})
+	.attr("y", function(d) {return d.y-24})
+        .attr("width", "35px")
+	.attr("height", "35px")	
+        .style("fill", "lightsteelblue");
+	
+	d3.select("#list").selectAll("li").
+	style("background",function(d){ 
+	  if(node.id== d.id) 
+	  return "#ffa366";
+	  else
+	    return "#cce5ff";
+	});
+          
     }
+    
     function isConnected(a, b) {
     return linkedByIndex[a.index + "," + b.index] || linkedByIndex[b.index + "," + a.index] || a.index == b.index;
 	}
@@ -184,21 +211,30 @@ var width = 720,
 
       root.fixed = false;
   }
-
+ 
+  render();
+  function render(){
       force.on("tick", function() {
 	link.attr("x1", function(d) { return d.source.x; })
 	    .attr("y1", function(d) { return d.source.y; })
 	    .attr("x2", function(d) { return d.target.x; })
 	    .attr("y2", function(d) { return d.target.y; });
 
-	node.attr("x", function(d) { return d.x-12; })
-	    .attr("y", function(d) { return d.y-12; });
+ 	node.attr("x", function(d) {return d.x-12})
+ 	    .attr("y", function(d) {return d.y-12});
+// 	    .attr("transform", function(d){return "translate(" + d.width/2 + "," + -d.height/2 + ")"});
 	    
-	text.attr("x", function(d) { return d.x+20; })
+// 	d3.select("image")
+// 	   .attr("x", function(d) {return d.x+d.width/2})
+// 	   .attr("y", function(d) {return d.y+d.height/2});
+	    
+	text.attr("x", function(d) { return d.x+26; })
 	    .attr("y", function(d) { return d.y; });
 	
 	    container.select("#tooltip")
 	.attr("x", function(d) { return d.x+20; })
 	.attr("y", function(d) { return d.y; });
+	
     });
+      }
   });
