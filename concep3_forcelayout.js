@@ -2,21 +2,8 @@ var width = 720,
     height =750;
       
 var margin = {top: -5, right: -5, bottom: -5, left: -5};
+
   
-//   var tip = d3.tip()
-//   .attr('class', 'd3-tip')
-// //   .offset(function(d) {
-// //     var coordinates = [0, 0];
-// //     coordinates = d3.mouse(this);
-// //     var x = coordinates[0];
-// //     var y = coordinates[1];
-// //     return x/2,y;
-// //   })
-//   .offset([-50, 0])
-//   .direction('e')
-//   .html(function(d) {
-//     return "<strong>Frequency:</strong> <span style='color:red'>" + "20" + "</span>";
-//   })
   var isChosen=0;
   var force = d3.layout.force()
       .charge(-1700)
@@ -43,24 +30,53 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
       .on("dblclick.zoom", null);
     
   var container = svg.append("g");
-
-//   function linkToolTip(d){
-//     
-//      var coordinates = [0, 0];
+    
+//   var tip = d3.tip()
+//   .attr('class', 'd3-tip')
+//    .offset(function(d) {
+//     var coordinates = [0, 0];
 //      coordinates = d3.mouse(this);
-//      var x = coordinates[0];
-//      var y = coordinates[1];
-//      
-//         var tooltip = container
-//         .append("text")
-//         .text("Yahoo")
-//         .attr("x", x+10)
-//         .attr("y", y+10)
-// 	.attr("text-anchor", "middle")
-//         .attr("id", "tooltip");
-// 
+//     var x = coordinates[0]*zoom.scale();
+//      var y = coordinates[1]*zoom.scale();
+//     return x/2,y;
+//   })
+//   .offset([0, 0])
+//   .direction('e')
+//   .html(function(d) {
+//   return "<strong>Frequency:</strong> <span style='color:red'>" + "20" + "</span>";
+//   })
+  
+//   container.call(tip);
+
+    function linkToolTip(link){
+     
+    var x1 = parseFloat(link.attr("x1"));
+    var x2 = parseFloat(link.attr("x2"));
+    var y1 = parseFloat(link.attr("y1"));
+    var y2 = parseFloat(link.attr("y2"));
+    var text=link.attr("type");
+    
+//     var coordinates = [0, 0];
+//     coordinates = d3.mouse(d3.select("#container"));
 //     
-//   }
+    var x=(x1+x2)/2;
+    var y=(y1+y2)/2;
+//       var coordinates = [0, 0];
+//       coordinates = d3.mouse(this);
+//       var x = coordinates[0];
+//       var y = coordinates[1];
+      
+         var tooltip = container
+         .append("text")
+         .text(text)
+	 .attr("class","tooltip")
+	 .style("background-color","black")
+	 .style("color","white")
+         .attr("x", x+50)
+         .attr("y", y+10)
+ 	 .attr("text-anchor", "middle")
+         .attr("id", "tooltip");  
+  }
   
   function zoomed() {
     container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
@@ -102,10 +118,10 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
       root.y = height / 2;
       root.fixed = true;
       
-  //graph.links.forEach(function(d, i) {
-  //       d.source = isNaN(d.source) ? d.source : graph.nodes[d.source];
-    //      d.target = isNaN(d.target) ? d.target : graph.nodes[d.target];
-  //   });
+  graph.links.forEach(function(d, i) {
+         d.source = isNaN(d.source) ? d.source : graph.nodes[d.source];
+          d.target = isNaN(d.target) ? d.target : graph.nodes[d.target];
+     });
       
   var linkedByIndex = {};
       graph.links.forEach(function(d) {
@@ -116,12 +132,15 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
     
     var link = container.append("g").selectAll(".link")
 	.data(graph.links)
-      .enter().append("line")
+	.enter().append("line")
 	.attr("class", "link")
-	.on("mouseover",function(d) {linkToolTip(d);
-	  
-        })
-	.on("mouseout", function(d) { d3.select("#tooltip").remove();})
+	.attr("x1",function(d){ return d.source.x; })
+	.attr("y1",function(d){ return d.source.y; })
+	.attr("x2",function(d){ return d.target.x; })
+	.attr("y2",function(d){ return d.target.y; })
+	.attr("type",function(d){ return d.linktype; })
+	.on("mouseover",function(d){linkToolTip(d3.select(this));})
+	.on("mouseout", function(d){d3.selectAll("#tooltip").remove();})
 	.style("stroke-width", function(d) { return 6 });
 
 
@@ -165,6 +184,8 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
     text.style("font-weight", "normal");
     link.style("stroke","#999");
     }
+      
+ 
     
     function mouseover(node) {
     text.style("font-weight", function(o){
@@ -177,7 +198,8 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
     //root.fixed = false;
     
   if (d3.event.defaultPrevented) return; 
-	  d3.selectAll(".node")
+	  d3.selectAll(".node"). transition()
+	.duration(750)
 	.attr("width", "24px")
 	.attr("height", "24px")	;
 	  
@@ -231,9 +253,9 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
 	text.attr("x", function(d) { return d.x+26; })
 	    .attr("y", function(d) { return d.y; });
 	
-	    container.select("#tooltip")
-	.attr("x", function(d) { return d.x+20; })
-	.attr("y", function(d) { return d.y; });
+// 	  container.select("#tooltip")
+// 	.attr("x", function(d) { return d.x+20; })
+// 	.attr("y", function(d) { return d.y; });
 	
     });
       }

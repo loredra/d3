@@ -2,14 +2,33 @@
 <meta charset="utf-8">
 <style>
 
+body{
+  background-color: #d3d3d3;
+  margin: 0;
+}
+
 #header{
-  background-color: green;
+  background-color:  #d3d3d3;
   height: 70px;
   text-align: center;
+  font-family:Lucida Sans Unicode;
+  box-sizing: border-box;
+  margin:0px 0px 5px;
+}
+h1{
+  height:48px;
+  width:218px;
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  background-size:auto;
+  background-image:  url("logo.gif");
+  background-repeat: no-repeat;
+  background-color: #cccccc;
 }
 
 #profile_of_node{
-  background-color: blue;
+  background-color: white;
   height: 110px;
   margin-bottom:26px;
   text-align: center;
@@ -20,7 +39,6 @@ margin: 2px 10px;
 width: 720px;
 max-width: 720px;
 margin: 0px auto;
-padding: 5px;
 flex:1;
 }
 #associate_info{
@@ -43,33 +61,49 @@ box-sizing: border-box;
 border:1px #d6dfe6;
 border-style: solid;
 resize: both;
+padding-bottom:5px;
 }
 
-body{
-  background-color: #d3d3d3;
-}
 .text{
 
 }
 .svg{
 background-color:  #eaf0fa;
+box-sizing: border-box;
+border:1px #d6dfe6;
+border-style: solid;
 }
 .node {
+  cursor:pointer;
   stroke: #fff;
   stroke-width: 1.5px;
 }
 
 .link {
   stroke: #999;
+  stroke-opacity: .6;
+}
+.link:hover {
+  
+  stroke: #ffa366 !important;
   stroke-opacity: .8;
 }
-.d3-tip {
-  line-height: 1;
-  font-weight: bold; 	
-  padding: 12px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #ff1;
-  border-radius: 23px;
+.tooltip{
+ position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+    opacity:1;
 }
 ul{
   padding-left: 3px;
@@ -84,14 +118,12 @@ ul li {
     list-style-type: none;
 }
 .text_svg{
-font-size: 10px;
-cursor: default;
-webkit-touch-callout: none;
-webkit-user-select: none;
-khtml-user-select: none;
-moz-user-select: none;
-ms-user-select: none;
-user-select: none;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;  
 }
 </style>
 <head>
@@ -99,12 +131,14 @@ user-select: none;
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 </head>
 <body>
-<div id="header" class=header> This is Header</div>
+<div id="header" class=header> This is Header
+<h1></h1>
+</div>
 <div id="main_layout" class=layout>
     <div id="profile_of_node" class=profile>This is profile</div>
     <div id="associate_info" class=associate_info>
-	<div id="associate_info_node" class=associate_info_node>This is node detail
-	  <div id="detail_info" class=line_by_line>This is a list of node</div>
+	<div id="associate_info_node" class=associate_info_node>
+	  <div id="detail_info" class=line_by_line>This is detail profile</div>
 	  <div id="list" class=line_by_line>This is a list of node</div>
 	</div>
 	<div id="visualization" class=associate_info_node>
