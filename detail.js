@@ -1,4 +1,5 @@
- 
+var detail=d3.select("#detail_info");
+
 d3.json("pst2.json", function(error, graph) {
  if (error) throw error;
 	
@@ -11,6 +12,8 @@ d3.json("pst2.json", function(error, graph) {
 	    .style("text-anchor", "left")
 	    .on("click",click);
 	    
+
+	    
 /*	    
    var detail=d3.select("#detail_info")
 	    .data(graph.nodes)
@@ -21,7 +24,7 @@ d3.json("pst2.json", function(error, graph) {
 	    .style("text-anchor", "left");
       }*/
       
-      function click(list) {
+  function click(list) {
   d3.selectAll("li")
       .style("background","#cce5ff");
   
@@ -43,5 +46,12 @@ d3.json("pst2.json", function(error, graph) {
       .attr("height", "35px");
       
       translateBeforeChose(node.attr("x"),node.attr("y"));
+      
+   d3.select(".detail_name").remove();
+   
+   detail.append("div").text(node.attr("name"))
+	  .attr("class","detail_name")
+	  .attr("position","relative");
+      
       }
     });

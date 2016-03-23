@@ -1,7 +1,7 @@
 var width = 720,
-    height =750;
+    height =754;
       
-var margin = {top: -5, right: -5, bottom: -5, left: -5};
+var margin = {top: -1, right: -1, bottom: -1, left: -1};
 
   
   var isChosen=0;
@@ -67,10 +67,11 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
 //       var y = coordinates[1];
       
          var tooltip = container
-         .append("text")
+         .append("title")
          .text(text)
 	 .attr("class","tooltip")
 	 .style("background-color","black")
+	 .style("stroke","black")
 	 .style("color","white")
          .attr("x", x+50)
          .attr("y", y+10)
@@ -129,8 +130,18 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
       });
   
     /*container.call(tip);*/
-    
-    var link = container.append("g").selectAll(".link")
+    	
+      var text = container.append("g").selectAll(".text")
+      .data(graph.nodes)
+      .enter().append("text")
+      .attr("class","text_svg")
+      .attr("dy", ".35em")
+      .style("font-size", 10 + "px")    
+      
+      text.text(function(d) { return d.name; })
+      .style("text-anchor", "left");
+	
+          var link = container.append("g").selectAll(".link")
 	.data(graph.links)
 	.enter().append("line")
 	.attr("class", "link")
@@ -139,17 +150,19 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
 	.attr("x2",function(d){ return d.target.x; })
 	.attr("y2",function(d){ return d.target.y; })
 	.attr("type",function(d){ return d.linktype; })
-	.on("mouseover",function(d){linkToolTip(d3.select(this));})
+	.on("mouseover",function(d){
+	  linkToolTip(d3.select(this));
+	})
 	.on("mouseout", function(d){d3.selectAll("#tooltip").remove();})
 	.style("stroke-width", function(d) { return 6 });
-
-
-    var node = container.append("g").selectAll(".node")
+	
+	    var node = container.append("g").selectAll(".node")
 	.data(graph.nodes)
 	.enter()
 	.append("image")
 	.attr("xlink:href",function(d){return d.type+ ".svg" ;})
 	.attr("class", "node")
+	.attr("name",function(d){return d.name; })
 	.attr("x", function(d) { return d.x; })
 	.attr("y", function(d) { return d.y; })
 	.attr("width", function(d) { return "24px" })
@@ -161,17 +174,6 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
 	.on("click",click)
 	.on("dblclick.zoom", null)
 	.on("dblclick",dblclick);
-	
-      var text = container.append("g").selectAll(".text")
-      .data(graph.nodes)
-      .enter().append("text")
-      .attr("class","text_svg")
-      .attr("dy", ".35em")
-      .style("font-size", 10 + "px")    
-      
-      text.text(function(d) { return d.name; })
-      .style("text-anchor", "left");
-	  
     force
 	.nodes(graph.nodes)
 	.links(graph.links)
@@ -222,6 +224,11 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
 	  else
 	    return "#cce5ff";
 	});
+    d3.select(".detail_name").remove();
+    
+   detail.append("div").text(node.name)
+	  .attr("class","detail_name")
+	  .attr("position","relative");
           
     }
     
@@ -237,6 +244,9 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
   render();
   function render(){
       force.on("tick", function() {
+	text.attr("x", function(d) { return d.x+26; })
+	    .attr("y", function(d) { return d.y; });
+	
 	link.attr("x1", function(d) { return d.source.x; })
 	    .attr("y1", function(d) { return d.source.y; })
 	    .attr("x2", function(d) { return d.target.x; })
@@ -250,9 +260,7 @@ var margin = {top: -5, right: -5, bottom: -5, left: -5};
 // 	   .attr("x", function(d) {return d.x+d.width/2})
 // 	   .attr("y", function(d) {return d.y+d.height/2});
 	    
-	text.attr("x", function(d) { return d.x+26; })
-	    .attr("y", function(d) { return d.y; });
-	
+
 // 	  container.select("#tooltip")
 // 	.attr("x", function(d) { return d.x+20; })
 // 	.attr("y", function(d) { return d.y; });

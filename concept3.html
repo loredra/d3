@@ -3,36 +3,61 @@
 <style>
 
 body{
-  background-color: #d3d3d3;
+  background-color: #f6f6f6;
   margin: 0;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+.measure_icon{
+ height:45px;
+ width:45px;
+ float:right;
+ margin:3px;
+  }
 
 #header{
-  background-color:  #d3d3d3;
+  background-color:  #f6f6f6;
   height: 70px;
   text-align: center;
   font-family:Lucida Sans Unicode;
   box-sizing: border-box;
-  margin:0px 0px 5px;
-}
+  }
 h1{
   height:48px;
   width:218px;
   position: absolute;
-  left: 25px;
-  top: 25px;
+  left: 305px;
+  top: 0px;
   background-size:auto;
   background-image:  url("logo.gif");
   background-repeat: no-repeat;
   background-color: #cccccc;
 }
-
-#profile_of_node{
+#profile_container
+{
   background-color: white;
   height: 110px;
+  margin: 0px auto;
+  position: relative;
   margin-bottom:26px;
+  margin-top:1px;
   text-align: center;
+  border-top: 1px solid #7acef4;
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: rgb(206, 222, 233);
 }
+#profile_of_node{
+  height: 100%;
+  max-width:1440px;
+  margin: 0px auto;
+  margin-top:1px;
+  position: relative;
+}
+.div_in_profile{
+  float:left;
+  height:95%;
+  width: 20%;
+  }
 .associate_info_node{
 border-radius: 5px;
 margin: 2px 10px;
@@ -44,7 +69,6 @@ flex:1;
 #associate_info{
 max-width: 1440px;
 margin: 0px auto;
-padding: 10px;
 margin-bottom:50px;
 text-align: left;
 display: flex;
@@ -53,6 +77,15 @@ background-color: white;
 box-sizing: border-box;
 border:1px #d6dfe6;
 border-style: solid;
+}
+#measure_detail{
+  float: right;
+  top:60%;
+  left: 60%;
+  width: 300px;
+  height: 300px;
+  padding-top:10px;
+  
 }
 .line_by_line{
 overflow-y:auto;
@@ -131,14 +164,29 @@ ul li {
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 </head>
 <body>
-<div id="header" class=header> This is Header
+<div id="header" class=header> This is Header and Navigation bar
 <h1></h1>
 </div>
 <div id="main_layout" class=layout>
-    <div id="profile_of_node" class=profile>This is profile</div>
+   <div id=profile_container>
+    <div id="profile_of_node" class=profile>
+      <div id="image_main_node" class=div_in_profile>Image of the node </div>
+      <div id="name_main_node" class=div_in_profile>Name of the node</div>
+      <div id="address_main_node" class=div_in_profile>Address of the node</div>
+      <div id="list_main_node" class=div_in_profile>List that node is in </div>
+      <div id="measure_main_node" class=div_in_profile>Activity that is banned</div>
+      </div>
+    </div>
     <div id="associate_info" class=associate_info>
 	<div id="associate_info_node" class=associate_info_node>
-	  <div id="detail_info" class=line_by_line>This is detail profile</div>
+	  <div id="detail_info" class=line_by_line>
+	    
+	    <div id=measure_detail class=measure_detail>
+	      <img class="measure_icon" src="arms.png"/>
+	      <img class="measure_icon" src="technical.png"/>
+	      <img class="measure_icon" src="money.png"/>
+	    </div>
+	  </div>
 	  <div id="list" class=line_by_line>This is a list of node</div>
 	</div>
 	<div id="visualization" class=associate_info_node>
