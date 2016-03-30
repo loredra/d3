@@ -89,7 +89,7 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
   }
 
   function dragged(d) {
-	root=d;
+  root=d;
     root.fixed=true;
     d3.select(this).attr("x", d.x = d3.event.x).attr("y", d.y = d3.event.y);
   }
@@ -130,6 +130,14 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
       });
   
     /*container.call(tip);*/
+   var myScale = d3.scale.linear().domain([0, 100]).range([0, 2 * Math.PI]); 
+ 
+   var arc = d3.svg.arc()
+   .innerRadius(20) 
+   .outerRadius(24)
+   .startAngle(myScale(0)) 
+   .endAngle(myScale(100));
+   
     	
       var text = container.append("g").selectAll(".text")
       .data(graph.nodes)
@@ -159,28 +167,43 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
 	    var node = container.append("g").selectAll(".node")
 	.data(graph.nodes)
 	.enter()
-	.append("image")
-	.attr("xlink:href",function(d){return d.type+ ".svg" ;})
+	.append("g")	
 	.attr("class", "node")
-	.attr("name",function(d){return d.name; })
-	.attr("x", function(d) { return d.x; })
-	.attr("y", function(d) { return d.y; })
-	.attr("width", function(d) { return "24px" })
-	.attr("height",function(d) { return "24px" })
 	.attr("isChosen", "no")
+	.attr("name",function(d){return d.name; })
 	.call(force.drag)
 	.on("mouseover",mouseover)
 	.on("mouseout",mouseout)
 	.on("click",click)
 	.on("dblclick.zoom", null)
 	.on("dblclick",dblclick);
+	
+	node
+	.append("image")
+	.attr("class","node_image")
+	.attr("xlink:href",function(d){return d.type+ ".svg" ;})
+	.attr("id", function(d) { return d.id})	
+	.attr("x",-12)
+	.attr("y",-12)
+	.attr("width", function(d) { return "24px" })
+	.attr("height",function(d) { return "24px" });
+	
+	
+	
+	
+    var vis=node
+    .append("path")
+    .attr("transform",function(d) { return "translate("+ d.x+","+d.y+")" })
+    .attr("class", "highlight_circle")
+    .attr("d",arc)
+    .attr("opacity",1);
     force
 	.nodes(graph.nodes)
 	.links(graph.links)
 	.start(); 
       
     node.append("title")
-	.text(function(d) { return d.name; });
+	.text(function(d) { return d.name;});
 	
     function mouseout(node) {
     text.style("font-weight", "normal");
@@ -200,21 +223,30 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
     //root.fixed = false;
     
   if (d3.event.defaultPrevented) return; 
-	  d3.selectAll(".node"). transition()
+	 d3.selectAll(".node_image")
+	.filter(d3.selectAll(".node_image").attr("isChosen")=="no")
+	.transition()
 	.duration(750)
+// 	.attr("x", function(d) {return d.x-12})
+// 	.attr("y", function(d) {return d.y-12})
 	.attr("width", "24px")
 	.attr("height", "24px")	;
 	  
-   translateBeforeChose(node.x,node.y);
-    
-  d3.select(this)
+  translateBeforeChose(node.x,node.y);
+  
+ 
+    vis
+    .attr("opacity",1); 
+  
+  d3.selectAll(".node_image")
+  .filter(d3.selectAll(".node_image").attr("id")==node.id)
 	.attr("isChosen", "yes")
 	.transition()
         .duration(750)
 	.attr("x", function(d) {return d.x-24})
 	.attr("y", function(d) {return d.y-24})
-        .attr("width", "35px")
-	.attr("height", "35px")	
+        .attr("width", "48px")
+	.attr("height", "48px")	
         .style("fill", "lightsteelblue");
 	
 	d3.select("#list").selectAll("li").
@@ -229,7 +261,7 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
    detail.append("div").text(node.name)
 	  .attr("class","detail_name")
 	  .attr("position","relative");
-          
+       
     }
     
     function isConnected(a, b) {
@@ -239,6 +271,22 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
       function dblclick(node) {
 
       root.fixed = false;
+  }
+  function drawCirlceonChosenNode(node) {
+   
+   var myScale = d3.scale.linear().domain([0, 100]).range([0, 2 * Math.PI]); 
+
+  
+   var arc = d3.svg.arc()
+   .innerRadius(50) 
+   .outerRadius(100)
+   .startAngle(myScale(0)) 
+   .endAngle(myScale(75));
+   
+    var vis=container.append("g")
+    .append("path")
+    .attr("d",arc);
+
   }
  
   render();
@@ -251,9 +299,13 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
 	    .attr("y1", function(d) { return d.source.y; })
 	    .attr("x2", function(d) { return d.target.x; })
 	    .attr("y2", function(d) { return d.target.y; });
-
- 	node.attr("x", function(d) {return d.x-12})
- 	    .attr("y", function(d) {return d.y-12});
+	
+// 	var node_width=parseInt(node.attr("width"), 10)/2;
+// 	var node_height=parseInt(node.attr("height"), 10)/2;
+ node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+	    
+// 	    .attr("width",function(d) {if(node.attr("id"))==null return "24px" else return "48px")
+// 	     .attr("height",function(d) {if(node.attr("id"))==null return "24px" else return "48px")
 // 	    .attr("transform", function(d){return "translate(" + d.width/2 + "," + -d.height/2 + ")"});
 	    
 // 	d3.select("image")
