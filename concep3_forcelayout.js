@@ -1,7 +1,7 @@
-var width = 720,
+  var width = 720,
     height =754;
       
-var margin = {top: -1, right: -1, bottom: -1, left: -1};
+  var margin = {top: -1, right: -1, bottom: -1, left: -1};
 
 
   var isChosen=0;
@@ -22,7 +22,7 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
 
 
   var svg = d3.select("body").select("#associate_info")
-  .	select("#visualization").append("svg")
+      .select("#visualization").append("svg")
       .attr("width", width)
       .attr("height", height)
       .attr("class","svg")
@@ -114,9 +114,9 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
   d3.json("pst2.json", function(error, graph) {
     if (error) throw error;
 
-    root=graph.nodes[0];
-      root.x = width / 2;
-      root.y = height / 2;
+     root=graph.nodes[0];
+       root.x = width / 2;
+       root.y = height / 2;
       root.fixed = true;
 
   graph.links.forEach(function(d, i) {
@@ -134,20 +134,13 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
    var myScale = d3.scale.linear().domain([0, 100]).range([0, 2 * Math.PI]); 
  
    var arc = d3.svg.arc()
-   .innerRadius(20) 
-   .outerRadius(24)
+   .innerRadius(30) 
+   .outerRadius(33)
    .startAngle(myScale(0)) 
    .endAngle(myScale(100));
    
 
       var text = container.append("g").selectAll(".text")
-      .data(graph.nodes)
-      .enter().append("text")
-      .attr("class","text_svg")
-      .attr("dy", ".35em")
-      .style("font-size", 10 + "px")
-
-        var text_link = container.append("g").selectAll(".text")
       .data(graph.nodes)
       .enter().append("text")
       .attr("class","text_svg")
@@ -166,28 +159,31 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
 	.attr("x2",function(d){ return d.target.x; })
 	.attr("y2",function(d){ return d.target.y; })
 	.attr("type",function(d){ return d.linktype; })
-    .style("marker-end",  "url(#resolved)")
-    .style("stroke",function(d){if(d.linktype=="Subsidiary") return "red";})
 	.on("mouseover",function(d){
 	  linkToolTip(d3.select(this));
 	})
 	.on("mouseout", function(d){d3.selectAll("#tooltip").remove();})
-	.style("stroke-width", function(d) { return 6 });
+	.style("stroke-width", function(d) { return 6 })
+	.style("marker-end",  "url(#resolved)")
+	.style("stroke",function(d){if(d.linktype=="Subsidiary") return "red";});
+      
+	
 
-    container.append("g").selectAll("marker")
-    .data(["suit", "licensing", "resolved"])
-  .enter().append("marker")
-    .attr("id", function(d) { return d; })
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", 25)
-    .attr("refY", 0)
-    .attr("markerWidth", 2)
-    .attr("markerHeight", 2)
-    .attr("orient", "auto")
-    .append("path")
-    .attr("d", "M0,-5L10,0L0,5")
-    .style("stroke", "#4679BD")
-    .style("opacity", "0.6");
+      
+    var marker = container.append("g").selectAll("marker")
+      .data(["suit", "licensing", "resolved"])
+      .enter().append("marker")
+      .attr("id", function(d) { return d; })
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 25)
+      .attr("refY", 0)
+      .attr("markerWidth", 2)
+      .attr("markerHeight", 2)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("d", "M0,-5L10,0L0,5")
+      .style("stroke", "#4679BD")
+      .style("opacity", "0.6");
 
 	var node = container.append("g").selectAll(".node")
 	.data(graph.nodes)
@@ -214,7 +210,7 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
 	
 
 	
-	node
+	var image_node=node
 	.append("image")
 	.attr("class","node_image")
 	.attr("xlink:href",function(d){return d.type+ ".svg" ;})
@@ -222,24 +218,33 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
 	.attr("x",-12)
 	.attr("y",-12)
 	.attr("width", function(d) { return "24px" })
-	.attr("height",function(d) { return "24px" });
-	
-	
-	
+	.attr("height",function(d) { return "24px" });	
 	
 	var vis=node
 	.append("path")
-	.attr("transform",function(d) { return "translate("+ d.x+","+d.y+")" })
+// 	.attr("transform",function(d) {
+// 	  return "translate("+ d.x+","+d.y+")" })
 	.attr("class", "highlight_circle")
 	.attr("d",arc)
-	.attr("opacity",1);
+	.attr("opacity",0);
 
-
-
+	
     force
 	.nodes(graph.nodes)
 	.links(graph.links)
 	.start();
+    
+
+    var text_link = container.append("g").selectAll(".text_link_svg")
+      .data(force.links())
+      .enter().append("text")
+      .text(function(d) { return d.linktype; })
+      .attr("class","text_link_svg")
+      .attr("dy", ".35em")
+      .style("text-anchor", "center")
+      .style("font-size", 10 + "px");
+    
+    change();
 
     node.append("title")
 	.text(function(d) { return d.name; });
@@ -260,31 +265,37 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
     }
     function click(node) {
     //root.fixed = false;
-    
+  vis.attr("opacity",0);   
   if (d3.event.defaultPrevented) return; 
-	 d3.selectAll(".node_image")
-	.filter(d3.selectAll(".node_image").attr("isChosen")=="yes")
+	 d3.selectAll(".node")
 	.attr("isChosen","no")
+	.select(".node_image")
 	.transition()
-
-	  
+	.attr("x", -12)
+	.attr("y", -12)
+	.attr("width", "24px")
+	.attr("height", "24px");
+  
+///////////////Translte selected node to middle////////////////////////	
   translateBeforeChose(node.x,node.y);
   
- 
-    vis
-    .attr("opacity",1); 
-
+////////////////////////////Set the node with isChosen yes to bigger/////////////
   d3.select(this)
 	.attr("isChosen", "yes")
+	.select(".node_image")
 	.transition()
 	.duration(750)
-	.attr("x", function(d) {return d.x-24})
-	.attr("y", function(d) {return d.y-24})
+	.attr("x",-24)
+	.attr("y",-24)
         .attr("width", "48px")
 	.attr("height", "48px")	
         .style("fill", "lightsteelblue");
 	
-
+d3.select(this)
+	.select(".highlight_circle")
+	.attr("opacity",1); 
+	
+///////////////////Color the coressponding list of name////////////////////////////
 	d3.select("#list").selectAll("li").
 	style("background",function(d){
 	  if(node.id== d.id)
@@ -292,6 +303,7 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
 	  else
 	    return "#cce5ff";
 	});
+//////////////////////////////////////////////////////////////////7
     d3.select(".detail_name").remove();
     d3.select(".detail_address").remove();
     d3.select(".ul_list_List").remove();
@@ -320,15 +332,22 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
         ;
     }
     /////Checkbox///////////////////////////////////////////////////////////
-    d3.select("input").on("change", change);
+    d3.select("#node_check_box").on("change", change);
+    d3.select("#link_check_box").on("change", change);
     function change() {
-        if(d3.selectAll('input').property('checked')==false)
-        newOpacity=1;
+        if(d3.select('#node_check_box').property('checked')==false)
+        isDisplay="initial";
         else
-        newOpacity=0;
+        isDisplay="none";
     d3.selectAll(".text_svg")
-    .style("opacity",newOpacity);
-                       }
+    .style("display",isDisplay); 
+   
+    if(d3.select('#link_check_box').property('checked')==false)
+        isDisplay="initial";
+        else
+        isDisplay="none";
+    d3.selectAll(".text_link_svg")
+    .style("display",isDisplay);                   }
     ///////////////////////////////////////////////////////////////////////
 
     function isConnected(a, b) {
@@ -359,6 +378,10 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
   render();
   function render(){
       force.on("tick", function() {
+	
+	text_link.attr("x", function(d) { return (d.source.x+d.target.x)/2 + 3; })
+	    .attr("y", function(d) { return (d.source.y+d.target.y)/2; });
+
 	text.attr("x", function(d) { return d.x+26; })
 	    .attr("y", function(d) { return d.y; });
 

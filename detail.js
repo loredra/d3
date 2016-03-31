@@ -47,7 +47,7 @@ d3.json("pst2.json", function(error, graph) {
       .attr("width","35px")
       .attr("height", "35px");
       
-      translateBeforeChose(node.attr("x"),node.attr("y"));
+      translateBeforeChose(node.datum().x,node.datum().y);
 
         d3.select(".detail_name").remove();
         d3.select(".detail_address").remove();

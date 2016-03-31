@@ -79,6 +79,10 @@ width: 50%;
 max-width: 50%;
 margin: 0px auto;
 }
+.toolbox{
+background-color:  #eaf0fa;
+opcaity: 0.7;
+}
 #associate_info{
 max-width: 1440px;
 margin: 0px auto;
@@ -167,9 +171,7 @@ overflow-y:auto;
 #listList{
 margin: 17px 2px 2px 2px;
 }
-.text{
 
-}
 .svg{
 background-color:  #eaf0fa;
 box-sizing: border-box;
@@ -284,9 +286,12 @@ ul li {
             </div>
         </div>
         <div id="visualization" class=associate_info_node>
-        <label class=checkbox><input type="checkbox"> Hide node's name</label>
-        <script type="text/javascript"src="concep3_forcelayout.js"></script>
-        <script type="text/javascript"src="detail.js"></script>
+	    <div class=toolbox>
+	      <label class=checkboxname><input id="node_check_box" type="checkbox"> Hide node's name</label>
+	      <label class=checkboxlink><input id="link_check_box" type="checkbox" checked=''> Hide link's type</label>
+	     </div>
+	      <script type="text/javascript"src="concep3_forcelayout.js"></script>
+	      <script type="text/javascript"src="detail.js"></script>
         </div>
     </div>
   </div>
