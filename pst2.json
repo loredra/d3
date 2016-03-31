@@ -1,7 +1,15 @@
 {
   "nodes":[
-    {"id":"0", "name":"ETCO INTERNATIONAL COMMODITIES LIMITED","type":"Company","trust":50},
-    {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":50},
+    {"id":"0", "name":"ETCO INTERNATIONAL COMMODITIES LIMITED","type":"Company","trust":50,
+    "isListedIn":["USSDN","Canadian list","Random List 3","RandomList4","RandomList5","RandomList6"],
+    "address":"sdnkgldfhngk ldfnhdfklnf gklhnfgdfg gk"
+
+    },
+    {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":40,
+    "isListedIn": ["Canadian List"],
+    "address":"Example2",
+    "AKA":"Pinkerton the tormenter"
+     },
     {"id": "2","name":"DIAZ ALFONSO, Liudis","type":"human","trust":50},
     {"id": "3","name":"PEREZ GUILLAMA, Osmani De La Caridad","type":"human","trust":50},
     {"id": "4","name":"RODRIGUEZ DELGADO, Minerva Aleida","type":"human","trust":50},
@@ -10,8 +18,9 @@
     {"id": "7","name":"UK GLOBAL COMMODITIES LIMITED","type":"Company","trust":50},
     {"id": "8","name":"ALL WORLD FOODS LIMITED","type":"Company","trust":50},
     {"id": "9","name":"DA SILVA, Jose Antonio Goncalves","type":"human","trust":50},
-    {"id": "10","name":"MUSSI VAZQUEZ, Eidel Manuel","type":"human","trust":50}
-     ],
+    {"id": "10","name":"MUSSI VAZQUEZ, Eidel Manuel","type":"human","trust":50},
+    {"id": "11","name":"Mother Company","type":"Company","trust":10}
+    ],
 "links":[
 {"source":1,"target":0,"linktype":"Secretary"},
 {"source":1,"target":0,"linktype":"Director"},
@@ -24,5 +33,6 @@
 {"source":2,"target":7,"linktype":"Director"},
 {"source":1,"target":8,"linktype":"Resigned"},
 {"source":9,"target":8,"linktype":"Secretary"},
-{"source":10,"target":8,"linktype":"Director"}
+{"source":10,"target":8,"linktype":"Director"},
+{"source":0,"target":11,"linktype":"Subsidiary"}
 ]}
