@@ -224,7 +224,8 @@ var margin = {top: -1, right: -1, bottom: -1, left: -1};
     
   if (d3.event.defaultPrevented) return; 
 	 d3.selectAll(".node_image")
-	.filter(d3.selectAll(".node_image").attr("isChosen")=="no")
+	.filter(d3.selectAll(".node_image").attr("isChosen")=="yes")
+	.attr("isChosen","no")
 	.transition()
 	.duration(750)
 // 	.attr("x", function(d) {return d.x-12})
