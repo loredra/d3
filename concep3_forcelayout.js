@@ -5,6 +5,7 @@
 
 
   var isChosen=0;
+  
   var force = d3.layout.force()
       .charge(-1700)
       .linkDistance(90)
@@ -109,6 +110,80 @@
     .attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
 
   }
+  function clickImage(node) {
+    //root.fixed = false;
+     
+  if (d3.event.defaultPrevented) return; 
+	 d3.selectAll(".node")
+	.attr("isChosen","no")
+	.select(".node_image")
+	.transition()
+	.attr("x", -12)
+	.attr("y", -12)
+	.attr("width", "24px")
+	.attr("height", "24px");
+  vis=d3.selectAll(".highlight_circle");
+  vis.attr("transform", "scale(0.1,0.1)")
+  .attr("opacity",0);
+  
+///////////////Translte selected node to middle////////////////////////	
+  translateBeforeChose(node.x,node.y);
+  
+////////////////////////////Set the node with isChosen yes to bigger/////////////
+  d3.select(this)
+	.attr("isChosen", "yes")
+	.select(".node_image")
+	.transition()
+	.duration(750)
+	.attr("x",-20)
+	.attr("y",-20)
+        .attr("width", "40px")
+	.attr("height", "40px")	
+        .style("fill", "lightsteelblue");
+	
+  d3.select(this)
+	.select(".highlight_circle")
+	.transition()
+	.duration(450)
+	.attr("transform", "scale(1,1)" )
+	.attr("opacity",0.7); 
+	
+///////////////////Color the coressponding list of name////////////////////////////
+	d3.select("#list").selectAll("li").
+	style("background",function(d){
+	  if(node.id== d.id)
+	  return "#ffa366";
+	  else
+	    return "#cce5ff";
+	});
+//////////////////////////////////////////////////////////////////7
+    d3.select(".detail_name").remove();
+    d3.select(".detail_address").remove();
+    d3.select(".ul_list_List").remove();
+
+   detail.select("#name").append("div").text(node.name)
+	  .attr("class","detail_name")
+	  .attr("position","relative");
+
+    detail.select("#address").append("div").text(node.address)
+	  .attr("class","detail_address")
+	  .attr("position","relative");
+
+      var listList;
+       listList=node.isListedIn.toString().split(",");
+
+          var listOfList=d3.select("#listList").append("ul")
+        .attr("class","ul_list_List")
+        .selectAll("li")
+        .data(listList)
+	    .enter()
+	    .append("li")
+        .attr("class","listList")
+	    .style("font-size", 15 + "px")
+	    .text(function(d){return d})
+	    .style("text-anchor", "start")
+        ;
+    }
 
 
   d3.json("pst2.json", function(error, graph) {
@@ -134,8 +209,8 @@
    var myScale = d3.scale.linear().domain([0, 100]).range([0, 2 * Math.PI]); 
  
    var arc = d3.svg.arc()
-   .innerRadius(30) 
-   .outerRadius(33)
+   .innerRadius(43) 
+   .outerRadius(46)
    .startAngle(myScale(0)) 
    .endAngle(myScale(100));
    
@@ -148,7 +223,7 @@
       .style("font-size", 10 + "px")
 
       text.text(function(d) { return d.name; })
-      .style("text-anchor", "left");
+      .style("text-anchor", "start");
 
     var link = container.append("g").selectAll(".link")
 	.data(graph.links)
@@ -188,7 +263,8 @@
 	var node = container.append("g").selectAll(".node")
 	.data(graph.nodes)
 	.enter()
-	.append("g")	
+	.append("g")
+	.attr("id", function(d) { return d.id})		
 	.attr("class", "node")
 	.attr("name",function(d){return d.name; })
 	.attr("address",function(d){return d.address; })
@@ -204,7 +280,7 @@
 	.call(force.drag)
 	.on("mouseover",mouseover)
 	.on("mouseout",mouseout)
-	.on("click",click)
+	.on("click",clickImage)
 	.on("dblclick.zoom", null)
 	.on("dblclick",dblclick);
 	
@@ -214,7 +290,6 @@
 	.append("image")
 	.attr("class","node_image")
 	.attr("xlink:href",function(d){return d.type+ ".svg" ;})
-	.attr("id", function(d) { return d.id})	
 	.attr("x",-12)
 	.attr("y",-12)
 	.attr("width", function(d) { return "24px" })
@@ -222,8 +297,8 @@
 	
 	var vis=node
 	.append("path")
-// 	.attr("transform",function(d) {
-// 	  return "translate("+ d.x+","+d.y+")" })
+	.attr("transform",function(d) {
+	  return "scale(0.1,0.1)" })
 	.attr("class", "highlight_circle")
 	.attr("d",arc)
 	.attr("opacity",0);
@@ -241,7 +316,7 @@
       .text(function(d) { return d.linktype; })
       .attr("class","text_link_svg")
       .attr("dy", ".35em")
-      .style("text-anchor", "center")
+      .style("text-anchor", "middle")
       .style("font-size", 10 + "px");
     
     change();
@@ -263,74 +338,7 @@
     link.style("stroke", function(o) {
       return o.source.index == node.index || o.target.index == node.index ? "red" : "#999"});
     }
-    function click(node) {
-    //root.fixed = false;
-  vis.attr("opacity",0);   
-  if (d3.event.defaultPrevented) return; 
-	 d3.selectAll(".node")
-	.attr("isChosen","no")
-	.select(".node_image")
-	.transition()
-	.attr("x", -12)
-	.attr("y", -12)
-	.attr("width", "24px")
-	.attr("height", "24px");
-  
-///////////////Translte selected node to middle////////////////////////	
-  translateBeforeChose(node.x,node.y);
-  
-////////////////////////////Set the node with isChosen yes to bigger/////////////
-  d3.select(this)
-	.attr("isChosen", "yes")
-	.select(".node_image")
-	.transition()
-	.duration(750)
-	.attr("x",-24)
-	.attr("y",-24)
-        .attr("width", "48px")
-	.attr("height", "48px")	
-        .style("fill", "lightsteelblue");
-	
-d3.select(this)
-	.select(".highlight_circle")
-	.attr("opacity",1); 
-	
-///////////////////Color the coressponding list of name////////////////////////////
-	d3.select("#list").selectAll("li").
-	style("background",function(d){
-	  if(node.id== d.id)
-	  return "#ffa366";
-	  else
-	    return "#cce5ff";
-	});
-//////////////////////////////////////////////////////////////////7
-    d3.select(".detail_name").remove();
-    d3.select(".detail_address").remove();
-    d3.select(".ul_list_List").remove();
-
-   detail.select("#name").append("div").text(node.name)
-	  .attr("class","detail_name")
-	  .attr("position","relative");
-
-    detail.select("#address").append("div").text(node.address)
-	  .attr("class","detail_address")
-	  .attr("position","relative");
-
-      var listList;
-       listList=node.isListedIn.toString().split(",");
-
-          var listOfList=d3.select("#listList").append("ul")
-        .attr("class","ul_list_List")
-        .selectAll("li")
-        .data(listList)
-	    .enter()
-	    .append("li")
-        .attr("class","listList")
-	    .style("font-size", 15 + "px")
-	    .text(function(d){return d})
-	    .style("text-anchor", "left")
-        ;
-    }
+    
     /////Checkbox///////////////////////////////////////////////////////////
     d3.select("#node_check_box").on("change", change);
     d3.select("#link_check_box").on("change", change);
@@ -389,7 +397,7 @@ d3.select(this)
 	    .attr("y1", function(d) { return d.source.y; })
 	    .attr("x2", function(d) { return d.target.x; })
 	    .attr("y2", function(d) { return d.target.y; })
-	    .style("stroke",function(d){if(d.linktype=="Subsidiary") return "red";}) ;
+	   /* .style("stroke",function(d){if(d.linktype=="Subsidiary") return "red";})*/ ;
 
 	  node.attr("transform", function(d) { 
 	    return "translate(" + d.x + "," + d.y + ")"; });

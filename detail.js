@@ -9,7 +9,7 @@ d3.json("pst2.json", function(error, graph) {
 	    .append("li")
 	    .style("font-size", 15 + "px")
 	    .text(function(d) { return d.name; })
-	    .style("text-anchor", "left")
+	    .style("text-anchor", "start")
 	    .on("click",click);
 
 
@@ -22,7 +22,8 @@ d3.json("pst2.json", function(error, graph) {
 	    .append("li")
 	    .style("font-size", 15 + "px")  
 	    .text(function(d) { return d.name; })
-	    .style("text-anchor", "left");
+	    .style("
+	    nchor", "left");
       }*/
       
   function click(list) {
@@ -70,11 +71,10 @@ d3.json("pst2.json", function(error, graph) {
         .data(listList)
 	    .enter()
 	    .append("li")
-        .attr("class","listList")
+	    .attr("class","listList")
 	    .style("font-size", 15 + "px")
 	    .text(function(d){return d})
-	    .style("text-anchor", "left")
-        ;
+	    .style("text-anchor", "start");
 
       }
     });
