@@ -9,10 +9,22 @@ body{
   margin: 0;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+label{
+ color: #4f4f4f;
+ font-weight: bold;
+ text-align: center;
+}
+label.checkbox{
+font-weight: normal;
+position: absolute;
+  top: 220px;
+  right: 250px;
+}
+
 .measure_icon{
  height:45px;
  width:45px;
- float:right;
+ float:center;
  margin:3px;
   }
 
@@ -63,10 +75,9 @@ h1{
 .associate_info_node{
 border-radius: 5px;
 margin: 2px 10px;
-width: 720px;
-max-width: 720px;
+width: 50%;
+max-width: 50%;
 margin: 0px auto;
-flex:1;
 }
 #associate_info{
 max-width: 1440px;
@@ -82,23 +93,80 @@ border-style: solid;
 }
 #measure_detail{
   float: right;
-  top:60%;
   left: 60%;
-  width: 300px;
-  height: 300px;
+  width: 40%;
+  height: 20%;
   padding-top:10px;
-  
+  text-align: center;
+
 }
-.line_by_line{
+#detail_info{
+  height:70%;
+  width:100%;
+}
+#name_and_address_container
+{   float:left;
+    height:20%;
+    width:60%;
+    padding-top:10px;
+    display: flex   ;
+}
+.list_and_program_container
+{   float:left;
+    height:20%;
+     width:100%;
+     padding-top:10px;
+     display: flex   ;
+}
+#name
+{
+  width:50%;
+  text-align:center;
+  margin: 2px;
+
+}
+#listList
+{
+  width:60%;
+  text-align:left;
+  margin: 2px;
+
+}
+#numList
+{
+  width:40%;
+  text-align:center;
+  margin: 17px 2px 2px 2px;
+
+}
+#aka
+{
+  width:40%;
+  text-align:center;
+  margin: 17px 2px 2px 2px;
+
+}
+#address
+{
+  width:50%;
+  text-align:center;
+  margin: 2px;
+}
+#list.line_by_line{
+max-height: 30%;
 overflow-y:auto;
-height: 50%;
 box-sizing: border-box;
 border:1px #d6dfe6;
 border-style: solid;
 resize: both;
 padding-bottom:5px;
 }
-
+.line_by_line{
+overflow-y:auto;
+}
+#listList{
+margin: 17px 2px 2px 2px;
+}
 .text{
 
 }
@@ -119,7 +187,7 @@ border-style: solid;
   stroke-opacity: .6;
 }
 .link:hover {
-  
+
   stroke: #ffa366 !important;
   stroke-opacity: .8;
 }
@@ -143,7 +211,7 @@ border-style: solid;
 ul{
   padding-left: 3px;
   list-style-type: none;
-  
+
 }
 ul li {
   cursor:pointer;
@@ -158,12 +226,11 @@ ul li {
   -khtml-user-select: none;    /* Konqueror */
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
-  user-select: none;  
+  user-select: none;
 }
 </style>
 <head>
 <script type="text/javascript"src="d3.min.js"></script>
-<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 </head>
 <body>
 <div id="header" class=header> This is Header and Navigation bar
@@ -180,21 +247,47 @@ ul li {
       </div>
     </div>
     <div id="associate_info" class=associate_info>
-	<div id="associate_info_node" class=associate_info_node>
-	  <div id="detail_info" class=line_by_line>
-	    
-	    <div id=measure_detail class=measure_detail>
-	      <img class="measure_icon" src="arms.png"/>
-	      <img class="measure_icon" src="technical.png"/>
-	      <img class="measure_icon" src="money.png"/>
-	    </div>
-	  </div>
-	  <div id="list" class=line_by_line>This is a list of node</div>
-	</div>
-	<div id="visualization" class=associate_info_node>
-	<script type="text/javascript"src="concep3_forcelayout.js"></script>
-	<script type="text/javascript"src="detail.js"></script>
-	</div>
+        <div id="associate_info_node" class=associate_info_node>
+            <div id="detail_info" class=line_by_line>
+                <div id="name_and_address_container" class=name_and_address_container>
+                    <div id="name">
+                     <label class="name_label">Name </label>
+                     </div>
+                     <div id="address">
+                     <label class="address_label">Address </label>
+                    </div>
+                </div>
+                <div id=measure_detail class=measure_detail>
+                       <label class="measure_label">Measured against this entity </label>
+                         <div class=measure>
+                      <img class="measure_icon" src="arms.png"/>
+                      <img class="measure_icon" src="technical.png"/>
+                      <img class="measure_icon" src="money.png"/>
+                        </div>
+                </div>
+                <div id="list_and_program_container" class=list_and_program_container>
+                     <div id="numList">
+                     <label class="measure_label">This entity are presented in 5 Lists
+                     </label>
+                     </div>
+                     <div id="listList" class=line_by_line>
+                     </div>
+                </div>
+                <div id="also_known_as_name_and " class=list_and_program_container >
+                    <div id="aka">
+                     <label class="name_label">This entity is also known as</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="list" class=line_by_line>This is a list of node
+            </div>
+        </div>
+        <div id="visualization" class=associate_info_node>
+        <label class=checkbox><input type="checkbox"> Hide node's name</label>
+        <script type="text/javascript"src="concep3_forcelayout.js"></script>
+        <script type="text/javascript"src="detail.js"></script>
+        </div>
     </div>
   </div>
 </div>
