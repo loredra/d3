@@ -32,28 +32,42 @@ d3.json("pst2.json", function(error, graph) {
   
   d3.select(this)
       .style("background","#ffa366");
+ /////////////////////Return everything in svg to normal///////////////////       
+  vis=d3.selectAll(".highlight_circle");
+	
+      vis.attr("transform", "scale(0.1,0.1)")
+	.attr("opacity",0);
       
-	 d3.selectAll(".node"). transition()
+	 d3.selectAll(".node").select(".node_image").transition()
 	.duration(750)
+	.attr("x",-12)
+	.attr("y", -12)
 	.attr("width", "24px")
 	.attr("height", "24px");
-	
+///////////////////////////////////////////////////////////////////////////      	
        var node=d3.selectAll(".node")
       .filter(function(d) { return d.id==list.id; })
 
-    node
-      .attr("isChosen", "yes")
+    node.attr("isChosen", "yes")
+      .select(".node_image")     
       .transition()
       .duration(750)
-      .attr("width","35px")
-      .attr("height", "35px");
+      .attr("x",-20)
+      .attr("y", -20)
+      .attr("width","40px")
+      .attr("height", "40px");
+      
+      node.select(".highlight_circle")
+	.transition()
+	.duration(450)
+	.attr("transform", "scale(1,1)" )
+	.attr("opacity",0.7);
       
       translateBeforeChose(node.datum().x,node.datum().y);
 
-        d3.select(".detail_name").remove();
-        d3.select(".detail_address").remove();
-        //d3.select(".listList").remove();
-        d3.select(".ul_list_List").remove();
+         d3.selectAll(".detail_name").remove();
+         d3.selectAll(".detail_address").remove();
+         d3.selectAll(".ul_list_List").remove();
 
    detail.select("#name").append("div").text(node.attr("name"))
 	  .attr("class","detail_name")
@@ -62,16 +76,34 @@ d3.json("pst2.json", function(error, graph) {
 	  .attr("class","detail_address")
 	  .attr("position","relative");
 
-     var listList;
-       listList=node.attr("isListedIn").split(",");
-
-          var listOfList=d3.select("#listList").append("ul")
+	var listList;
+	var listAKA=node.datum().AKA.toString();
+     
+	listList=node.attr("isListedIn").split(",");
+	listAKA=listAKA.split(",");
+	
+	var numOfList=listList.length; 
+        d3.select(".numOfList")
+	.text(numOfList);
+	
+	var listOfList=d3.select("#listList").append("ul")
         .attr("class","ul_list_List")
         .selectAll("li")
         .data(listList)
 	    .enter()
 	    .append("li")
 	    .attr("class","listList")
+	    .style("font-size", 15 + "px")
+	    .text(function(d){return d})
+	    .style("text-anchor", "start");
+	    
+	var listOfAKA=d3.select("#listAKA").append("ul")
+        .attr("class","ul_list_List")
+        .selectAll("li")
+        .data(listAKA)
+	    .enter()
+	    .append("li")
+	    .attr("class","listAKA")
 	    .style("font-size", 15 + "px")
 	    .text(function(d){return d})
 	    .style("text-anchor", "start");

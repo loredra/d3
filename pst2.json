@@ -2,13 +2,14 @@
   "nodes":[
     {"id":"0", "name":"ETCO INTERNATIONAL COMMODITIES LIMITED","type":"Company","trust":50,
     "isListedIn":["USSDN","Canadian list","Random List 3","RandomList4","RandomList5","RandomList6"],
-    "address":"sdnkgldfhngk ldfnhdfklnf gklhnfgdfg gk"
+    "address":"2D, Berminhamstreeet , Great Britain",
+    "AKA":["ETCO INTERNATIONAL SMUGGLING COMPANY","HAAAAA"]
 
     },
     {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":40,
     "isListedIn": ["Canadian List"],
-    "address":"Example2",
-    "AKA":"Pinkerton the tormenter"
+    "address":"Example2, Some fake address",
+    "AKA":["Pinkerton the tormenter"]
      },
     {"id": "2","name":"DIAZ ALFONSO, Liudis","type":"human","trust":50},
     {"id": "3","name":"PEREZ GUILLAMA, Osmani De La Caridad","type":"human","trust":50},

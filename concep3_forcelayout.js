@@ -1,5 +1,6 @@
-  var width = 720,
-    height =754;
+  var width =d3.select("#visualization").node().getBoundingClientRect().width;
+  var height =d3.select("#visualization").node().getBoundingClientRect().height-26;
+    
       
   var margin = {top: -1, right: -1, bottom: -1, left: -1};
 
@@ -24,9 +25,9 @@
 
   var svg = d3.select("body").select("#associate_info")
       .select("#visualization").append("svg")
-      .attr("width", width)
-      .attr("height", height)
       .attr("class","svg")
+      .attr("width",width)
+      .attr("height",height)
       .call(zoom)
       .on("dblclick.zoom", null);
     
@@ -149,8 +150,21 @@
 	.attr("opacity",0.7); 
 	
 ///////////////////Color the coressponding list of name////////////////////////////
-	d3.select("#list").selectAll("li").
-	style("background",function(d){
+
+	var chosenItem=d3.select("#list")
+	.selectAll("li")
+	.filter(function(d){
+	  return node.id== d.id});
+	
+      var index;
+      chosenItem
+      .each(function(d,i){ 
+      index= i;});
+      
+      d3.select("#list")
+	.property("scrollTop",/*d3.select("#list").property("scrollHeight")*/-15*index)
+	.selectAll("li")
+	.style("background",function(d){
 	  if(node.id== d.id)
 	  return "#ffa366";
 	  else
@@ -178,7 +192,7 @@
         .data(listList)
 	    .enter()
 	    .append("li")
-        .attr("class","listList")
+	    .attr("class","listList")
 	    .style("font-size", 15 + "px")
 	    .text(function(d){return d})
 	    .style("text-anchor", "start")

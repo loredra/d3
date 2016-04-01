@@ -72,6 +72,7 @@ h1{
   float:left;
   height:95%;
   width: 20%;
+  font-weight: bold;
   }
 .associate_info_node{
 border-radius: 5px;
@@ -95,6 +96,7 @@ background-color: white;
 box-sizing: border-box;
 border:1px #d6dfe6;
 border-style: solid;
+height:719px;
 }
 #measure_detail{
   float: right;
@@ -103,6 +105,12 @@ border-style: solid;
   height: 20%;
   padding-top:10px;
   text-align: center;
+
+}
+.measure_label{
+  width:100%;
+  text-align:left;
+  margin-top: 15px;
 
 }
 #detail_info{
@@ -118,60 +126,51 @@ border-style: solid;
 }
 .list_and_program_container
 {   float:left;
-    height:20%;
+    height:26%;
      width:100%;
      padding-top:10px;
+     padding-bottom:15px;
      display: flex   ;
+     
 }
-#name
+.nameandAddress
 {
   width:50%;
-  text-align:center;
-  margin: 2px;
+  text-align:left;
+  margin: 15px 5px 15px 15px;
 
 }
-#listList
+.line_by_line_small
 {
-  width:60%;
+  width:70%;
   text-align:left;
   margin: 2px;
+  overflow-y:auto;
 
 }
-#numList
+.numListandaka
 {
-  width:40%;
-  text-align:center;
-  margin: 17px 2px 2px 2px;
+  width:30%;
+  text-align:left;
+  margin: 17px 2px 2px 15px;
 
 }
-#aka
-{
-  width:40%;
-  text-align:center;
-  margin: 17px 2px 2px 2px;
 
-}
-#address
-{
-  width:50%;
-  text-align:center;
-  margin: 2px;
-}
 #list.line_by_line{
 max-height: 30%;
-overflow-y:auto;
 box-sizing: border-box;
 border:1px #d6dfe6;
 border-style: solid;
 resize: both;
 padding-bottom:5px;
 }
+
 .line_by_line{
 overflow-y:auto;
 }
-#listList{
+/*#listList{
 margin: 17px 2px 2px 2px;
-}
+}*/
 
 .svg{
 background-color:  #eaf0fa;
@@ -220,7 +219,7 @@ ul li {
   cursor:pointer;
   display: block;
   background: #cce5ff;
-  margin: 5px;
+  margin: 0px 3px 3px 3px;
     list-style-type: none;
 }
 .text_svg{
@@ -237,55 +236,60 @@ ul li {
 </head>
 <body>
 <div id="header" class=header> This is Header and Navigation bar
-<h1></h1>
 </div>
 <div id="main_layout" class=layout>
-   <div id=profile_container>
+  <div id=profile_container>
     <div id="profile_of_node" class=profile>
-      <div id="image_main_node" class=div_in_profile>Image of the node </div>
-      <div id="name_main_node" class=div_in_profile>Name of the node</div>
-      <div id="address_main_node" class=div_in_profile>Address of the node</div>
-      <div id="list_main_node" class=div_in_profile>List that node is in </div>
-      <div id="measure_main_node" class=div_in_profile>Activity that is banned</div>
-      </div>
+	<div id="image_main_node" class=div_in_profile>Image of the node </div>
+	<div id="name_main_node" class=div_in_profile>Name of the node</div>
+	<div id="address_main_node" class=div_in_profile>Address of the node</div>
+	<div id="list_main_node" class=div_in_profile>List that node is in </div>
+	<div id="measure_main_node" class=div_in_profile>Activity that is banned</div>
     </div>
+  </div>
     <div id="associate_info" class=associate_info>
         <div id="associate_info_node" class=associate_info_node>
             <div id="detail_info" class=line_by_line>
                 <div id="name_and_address_container" class=name_and_address_container>
-                    <div id="name">
+                    <div id="name" class=nameandAddress>
                      <label class="name_label">Name </label>
-                     </div>
-                     <div id="address">
+                    </div>
+                    <div id="address" class=nameandAddress>
                      <label class="address_label">Address </label>
                     </div>
                 </div>
                 <div id=measure_detail class=measure_detail>
-                       <label class="measure_label">Measured against this entity </label>
-                         <div class=measure>
+			<div id="measure_label" class=measure_label>
+                       <label >Measured against this entity </label>
+                        <div class=measure>
+                         
                       <img class="measure_icon" src="arms.png"/>
                       <img class="measure_icon" src="technical.png"/>
                       <img class="measure_icon" src="money.png"/>
                         </div>
+                 </div>
+                        
                 </div>
                 <div id="list_and_program_container" class=list_and_program_container>
-                     <div id="numList">
-                     <label class="measure_label">This entity are presented in 5 Lists
+                     <div id="numList" class=numListandaka>
+                     <label>Mentioned in <label class=numOfList></label> Lists
                      </label>
                      </div>
-                     <div id="listList" class=line_by_line>
+                     <div id="listList" class=line_by_line_small>
                      </div>
                 </div>
                 <div id="also_known_as_name_and " class=list_and_program_container >
-                    <div id="aka">
-                     <label class="name_label">This entity is also known as</label>
+                    <div id="aka" class=numListandaka>
+                     <label class="name_label">Also known as</label>
+                    </div>
+                    <div id="listAKA" class=line_by_line_small>
                     </div>
                 </div>
             </div>
 
             <div id="list" class=line_by_line>This is a list of node
             </div>
-        </div>
+        </div>	
         <div id="visualization" class=associate_info_node>
 	    <div class=toolbox>
 	      <label class=checkboxname><input id="node_check_box" type="checkbox"> Hide node's name</label>
