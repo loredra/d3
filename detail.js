@@ -7,6 +7,7 @@ d3.json("pst2.json", function(error, graph) {
 	    .data(graph.nodes)
 	    .enter()
 	    .append("li")
+// 	    .attr("id",function(d,i) {}j)
 	    .style("font-size", 15 + "px")
 	    .text(function(d) { return d.name; })
 	    .style("text-anchor", "start")

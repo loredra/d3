@@ -162,7 +162,7 @@
       index= i;});
       
       d3.select("#list")
-	.property("scrollTop",/*d3.select("#list").property("scrollHeight")*/-15*index)
+	.property("scrollTop",5*index)
 	.selectAll("li")
 	.style("background",function(d){
 	  if(node.id== d.id)
