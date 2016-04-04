@@ -2,16 +2,18 @@
   "nodes":[
     {"id":"0", "name":"ETCO INTERNATIONAL COMMODITIES LIMITED","type":"Company","trust":50,
     "isListedIn":["USSDN","Canadian list","Random List 3","RandomList4","RandomList5","RandomList6"],
-    "address":"2D, Berminhamstreeet , Great Britain",
+    "address":"Devonshire House, Devonshire Street 1 London GB",
     "AKA":["ETCO INTERNATIONAL SMUGGLING COMPANY","HAAAAA"]
-
     },
     {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":40,
     "isListedIn": ["Canadian List"],
     "address":"Example2, Some fake address",
     "AKA":["Pinkerton the tormenter"]
      },
-    {"id": "2","name":"DIAZ ALFONSO, Liudis","type":"human","trust":50},
+    {"id": "2","name":"DIAZ ALFONSO, Liudis","type":"human","trust":50,
+    "isListedIn":["USSDN","Canadian list","Random List 3"],
+    "AKA":["Lionel Messi","Lusen Carf","Dummy Name 1","Dummy Name 2","Dummy Name 3","Dummy Name 4","Dummy Name 5"]
+      },
     {"id": "3","name":"PEREZ GUILLAMA, Osmani De La Caridad","type":"human","trust":50},
     {"id": "4","name":"RODRIGUEZ DELGADO, Minerva Aleida","type":"human","trust":50},
     {"id": "5","name":"WILSON GREEN PROPERTY LIMITED","type":"Company","trust":50},
@@ -20,7 +22,14 @@
     {"id": "8","name":"ALL WORLD FOODS LIMITED","type":"Company","trust":50},
     {"id": "9","name":"DA SILVA, Jose Antonio Goncalves","type":"human","trust":50},
     {"id": "10","name":"MUSSI VAZQUEZ, Eidel Manuel","type":"human","trust":50},
-    {"id": "11","name":"Mother Company","type":"Company","trust":10}
+    {"id": "11","name":"Mother Company","type":"Company","trust":10},
+    {"id":"12", "name":"ETCO INTERNATIONAL COMPANY LIMITED","type":"Company","trust":50,
+    "isListedIn":["USSDN"],
+    "address":"Kanda Nishiki Cho 1-5 Housenumber Kawabe building"   },
+      {"id":"13", "name":"ETCO China INTERNATIONAL Trading COMPANY LIMITED","type":"Company","trust":50,
+    "isListedIn":["Anti-Dumping List"],
+    "address":"Kanda Nishiki Cho 1-5 Housenumber Kawabe building",
+    "AKA":["ETCO Industrial"]   }
     ],
 "links":[
 {"source":1,"target":0,"linktype":"Secretary"},
@@ -35,5 +44,8 @@
 {"source":1,"target":8,"linktype":"Resigned"},
 {"source":9,"target":8,"linktype":"Secretary"},
 {"source":10,"target":8,"linktype":"Director"},
-{"source":0,"target":11,"linktype":"Subsidiary"}
+{"source":0,"target":11,"linktype":"Subsidiary"},
+{"source":0,"target":12,"linktype":"Related"},
+{"source":0,"target":13,"linktype":"Related"},
+{"source":12,"target":13,"linktype":"Related"}
 ]}

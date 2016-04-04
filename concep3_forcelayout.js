@@ -139,9 +139,9 @@
 	.attr("x",-20)
 	.attr("y",-20)
         .attr("width", "40px")
-	.attr("height", "40px")	
+	.attr("height", "40px")
         .style("fill", "lightsteelblue");
-	
+
   d3.select(this)
 	.select(".highlight_circle")
 	.transition()
@@ -155,14 +155,12 @@
 	.selectAll("li")
 	.filter(function(d){
 	  return node.id== d.id});
-	
-      var index;
-      chosenItem
-      .each(function(d,i){ 
-      index= i;});
-      
-      d3.select("#list")
-	.property("scrollTop",5*index)
+
+
+
+
+     d3.select("#list")
+	.property("scrollTop",chosenItem.attr("id").toString().replace('index','')*19)
 	.selectAll("li")
 	.style("background",function(d){
 	  if(node.id== d.id)
@@ -173,7 +171,7 @@
 //////////////////////////////////////////////////////////////////7
     d3.select(".detail_name").remove();
     d3.select(".detail_address").remove();
-    d3.select(".ul_list_List").remove();
+    d3.selectAll(".ul_list_List").remove();
 
    detail.select("#name").append("div").text(node.name)
 	  .attr("class","detail_name")
@@ -184,7 +182,23 @@
 	  .attr("position","relative");
 
       var listList;
-       listList=node.isListedIn.toString().split(",");
+      var listAKA;
+       try {
+
+       listAKA=node.AKA.toString().split(",");
+            }
+            catch(err) {  }
+          try {
+
+     listList=node.isListedIn.toString().split(",");
+      numOfList=listList.length;
+            }
+            catch(err) { numOfList=0;  }
+
+
+
+        d3.select(".numOfList")
+	.text(numOfList);
 
           var listOfList=d3.select("#listList").append("ul")
         .attr("class","ul_list_List")
@@ -197,6 +211,16 @@
 	    .text(function(d){return d})
 	    .style("text-anchor", "start")
         ;
+        	var listOfAKA=d3.select("#listAKA").append("ul")
+        .attr("class","ul_list_List")
+        .selectAll("li")
+        .data(listAKA)
+	    .enter()
+	    .append("li")
+	    .attr("class","listAKA")
+	    .style("font-size", 15 + "px")
+	    .text(function(d){return d})
+	    .style("text-anchor", "start");
     }
 
 
@@ -334,6 +358,7 @@
       .style("font-size", 10 + "px");
     
     change();
+
 
     node.append("title")
 	.text(function(d) { return d.name; });
