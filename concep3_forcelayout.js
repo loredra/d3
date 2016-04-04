@@ -1,5 +1,5 @@
-  var width =d3.select("#visualization").node().getBoundingClientRect().width;
-  var height =d3.select("#visualization").node().getBoundingClientRect().height-26;
+  var width =d3.select("#associate_info_node").node().getBoundingClientRect().width;
+  var height =d3.select("#associate_info_node").node().getBoundingClientRect().height-26;
     
       
   var margin = {top: -1, right: -1, bottom: -1, left: -1};
@@ -277,8 +277,7 @@
 	})
 	.on("mouseout", function(d){d3.selectAll("#tooltip").remove();})
 	.style("stroke-width", function(d) { return 6 })
-	.style("marker-end",  "url(#resolved)")
-	.style("stroke",function(d){if(d.linktype=="Subsidiary") return "red";});
+	.style("marker-end",  "url(#resolved)");
       
 	
 

@@ -45,7 +45,13 @@ function click(list) {
 	  .attr("class","detail_address")
 	  .attr("position","relative");
 
-	var listList;
+	    d3.selectAll("li")
+      .style("background","#cce5ff");
+
+  d3.select(this)
+      .style("background","#ffa366");  
+	  
+    var listList;
     var numOfList;
 
 
@@ -87,11 +93,7 @@ catch(err) {  }
 	    .text(function(d){return d})
 	    .style("text-anchor", "start");
 
-    d3.selectAll("li")
-      .style("background","#cce5ff");
 
-  d3.select(this)
-      .style("background","#ffa366");
       }
 
 d3.json("pst2.json", function(error, graph) {
