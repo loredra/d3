@@ -1,15 +1,17 @@
+
   var width =d3.select("#associate_info_node").node().getBoundingClientRect().width;
   var height =d3.select("#associate_info_node").node().getBoundingClientRect().height-26;
     
       
   var margin = {top: -1, right: -1, bottom: -1, left: -1};
 
-
+  var trustData={red: "Bad business", yellow: "Shady connection", green:"Safe for now"};
+  
   var isChosen=0;
   
   var force = d3.layout.force()
       .charge(-1700)
-      .linkDistance(90)
+      .linkDistance(120)
       .size([width, height]);
       
   var drag = force.drag()
@@ -19,7 +21,7 @@
   .on("dragend", dragended);
       
   var zoom = d3.behavior.zoom()
-      .scaleExtent([0.7, 6])
+      .scaleExtent([0.4, 6])
       .on("zoom", zoomed)
 
 
@@ -105,11 +107,27 @@
   var dcx = (width/2-x*zoom.scale());
   var dcy = (height/2-y*zoom.scale());
   zoom.translate([dcx,dcy]);
+  
   container
     .transition()
     .duration(750)
     .attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
 
+  }
+  function trust_to_color(trust){
+    
+   if(trust>=80){
+     return "green";
+  
+     }
+   if(trust>=30 && trust<=79){
+     return "yellow";
+
+   }
+   if(trust<=30)  {
+     return "red";
+     
+  }  
   }
   function clickImage(node) {
     //root.fixed = false;
@@ -147,7 +165,7 @@
 	.transition()
 	.duration(450)
 	.attr("transform", "scale(1,1)" )
-	.attr("opacity",0.7); 
+	.attr("opacity",0.9); 
 	
 ///////////////////Color the coressponding list of name////////////////////////////
 
@@ -236,7 +254,7 @@
          d.source = isNaN(d.source) ? d.source : graph.nodes[d.source];
           d.target = isNaN(d.target) ? d.target : graph.nodes[d.target];
      });
-
+  tooltip=d3.select(".tooltip");
   var linkedByIndex = {};
       graph.links.forEach(function(d) {
 	  linkedByIndex[d.source + "," + d.target] = true;
@@ -316,12 +334,18 @@
 	.attr("name",function(d){return d.name; })
 	.call(force.drag)
 	.on("mouseover",mouseover)
+	.on("mousemove",mousemove)
 	.on("mouseout",mouseout)
 	.on("click",clickImage)
 	.on("dblclick.zoom", null)
 	.on("dblclick",dblclick);
 	
 
+	
+	var trust_cirlce=node
+	.append("circle")
+	.attr("r",26)
+	.style("fill", function(d) { return trust_to_color(d.trust) });
 	
 	var image_node=node
 	.append("image")
@@ -339,7 +363,9 @@
 	.attr("class", "highlight_circle")
 	.attr("d",arc)
 	.attr("opacity",0);
-
+	
+		
+	
 	
     force
 	.nodes(graph.nodes)
@@ -357,17 +383,54 @@
       .style("font-size", 10 + "px");
     
     change();
+    
 
 
     node.append("title")
 	.text(function(d) { return d.name; });
-
+	
+//     info_color_container=d3.select(".svg").append("g")
+//       .attr("class",".info_color_container");
+//       
+//       info_color_container.selectAll("g")
+//       .data(trustData)
+//       .enter()
+//       .append("g")
+//       .attr("class",".info_color_list")
+//       .attr("data-legend",function(d) { return d.name})
+  var trust=d3.select(".svg").append("g")
+      .attr("transform","translate(570,0)");
+      
+      trust.append("rect")
+      .attr("width","180px")
+      .attr("height","110px")
+      .style("fill","#eaf0fa");
+      
+  var trust_draw=trust.selectAll()
+      .data(graph.level_trust)
+      .enter();
+      
+      trust_draw.append("text")
+      .attr("transform",function(d,i){return "translate(22,"+33*(i+1)+")" })
+      .text(function(d) { return d.Message})
+      .style("fill","black");
+      
+           trust_draw.append("circle")
+      .attr("r",10)
+      .attr("transform",function(d,i){return "translate(10,"+30*(i+1)+")" })
+      .style("fill",function(d) { return d.color});
+    
     function mouseout(node) {
     text.style("font-weight", "normal");
     link.style("stroke","#999");
+    tooltip
+    .style("visibility", "hidden");
     }
 
-
+       function mousemove(node) {
+     tooltip.style("top", (d3.event.pageY + 16) + "px")
+            .style("left", (d3.event.pageX + 16) + "px");
+}
 
     function mouseover(node) {
     text.style("font-weight", function(o){
@@ -375,6 +438,9 @@
 
     link.style("stroke", function(o) {
       return o.source.index == node.index || o.target.index == node.index ? "red" : "#999"});
+    
+    tooltip.style("visibility", "visible");
+            
     }
     
     /////Checkbox///////////////////////////////////////////////////////////
@@ -403,22 +469,6 @@
       function dblclick(node) {
 
       root.fixed = false;
-  }
-  function drawCirlceonChosenNode(node) {
-   
-   var myScale = d3.scale.linear().domain([0, 100]).range([0, 2 * Math.PI]); 
-
-  
-   var arc = d3.svg.arc()
-   .innerRadius(50) 
-   .outerRadius(100)
-   .startAngle(myScale(0)) 
-   .endAngle(myScale(75));
-   
-    var vis=container.append("g")
-    .append("path")
-    .attr("d",arc);
-
   }
  
   render();

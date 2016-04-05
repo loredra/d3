@@ -58,4 +58,11 @@
 {"source":0,"target":12,"linktype":"Related"},
 {"source":0,"target":13,"linktype":"Related"},
 {"source":12,"target":13,"linktype":"Related"}
-]}
+],
+
+"level_trust":[
+{"Message":"Dangerous","color":"red"},
+{"Message":"Shady Business","color":"yellow"},
+{"Message":"Safe for now","color":"green"}
+]
+}

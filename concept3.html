@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+div.tooltip {
+    visibility:hidden;
+    background: lightblue;
+    border:solid gray;
+    position: absolute;
+}
 #searchbox {
     top: 50%;
     left: 50%;
@@ -11,12 +17,7 @@
     height: 35px;
     margin-top: 35px;
     padding: 10px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #c4d9df #a4c3ca #83afb7;
-    border-radius: 35px;
-    background-color: #eaf8fc;
-    background-image: linear-gradient(#fff, #d4e8ec);
+    
 }
 
 #search,
@@ -30,7 +31,6 @@
     height: 23px;
     padding: 5px 9px;
     border: 1px solid #a4c3ca;
-    border-radius: 50px 3px 3px 50px;
     background: #f1f1f1;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .25) inset, 0 1px 0 rgba(255, 255, 255, 1);
 }
@@ -38,28 +38,20 @@
 /* ----------------------- */
 
 #submit {
-    font: bold 14px Arial, Helvetica;
+padding-left:5px;
+padding-top:5px;
     position: relative;
-    width: 90px;
-    height: 35px;
-    margin: 0 0 0 10px;
-    padding: 0;
-    cursor: pointer;
-    color: #ffa366
-    text-shadow: 0 1px 0 rgba(255,255,255,.5);
-    border-width: 1px;
-    border-style: solid;
-    border-color: #f6f6f6  #f6f6f6  #f6f6f6;
-    border-radius: 3px 50px 50px 3px;
-    background-color: #6cbb6b;
-    background-image: linear-gradient(#ffa366, #ffa466);
-    box-shadow: 0 0 1px #ffa366,
-    0 1px 0 #ffa366 inset;
+  cursor:pointer;
+    border:none;
+    width:25px;
+    height:25px;
+
+    
+  
 }
 
 #submit:hover {
-    background-color: #95d788;
-    background-image: linear-gradient(#6cbb6b, #95d788);
+
 }
 
 #submit:active {
@@ -166,8 +158,13 @@ h1 {
     margin: 2px 10px;
     margin: 0 auto;
     border-radius: 5px;
+    
 }
-
+#associate_info_node {
+resize:horizontal;
+overflow:auto;
+    
+}
 .toolbox {
     opacity: .7;
     background-color: #eaf0fa;
@@ -259,14 +256,29 @@ h1 {
 /*#listList{
 margin: 17px 2px 2px 2px;
 }*/
-
 .svg {
     box-sizing: border-box;
     border: 1px #d6dfe6;
     border-style: solid;
     background-color: #eaf0fa;
 }
-
+.info_color_container{
+float: right;
+width: 50px;
+height:50px;
+display:flex;
+background:inherit;
+}
+.info_color_line{
+float: right;
+width: 100px;
+height:30px;
+}
+.info_color_line_image{
+float: left;
+width: 30%;
+height:100%;
+}
 .node {
     cursor: pointer;
     stroke: #fff;
@@ -283,23 +295,6 @@ margin: 17px 2px 2px 2px;
     stroke-opacity: .8;
 }
 
-.tooltip {
-    position: relative;
-    position: absolute;
-    z-index: 1;
-    bottom: 100%;
-    left: 50%;
-    display: inline-block;
-    width: 120px;
-    margin-left: -60px;
-    padding: 5px 0;
-    text-align: center;
-    opacity: 1;
-    color: #fff;
-    border-bottom: 1px dotted black;
-    border-radius: 6px;
-    background-color: black;
-}
 
 ul {
     padding-left: 3px;
@@ -333,9 +328,11 @@ ul li {
 <script type="text/javascript"src="d3.min.js"></script>
 </head>
 <body>
+<div class="tooltip">Tipsy!</div>
 <div id="header" class=header> This is Header and Navigation bar
   <h1></h1>
 </div>
+
 <div id="main_layout" class=layout>
   <div id=profile_container>
     <div id="profile_of_node" class=profile>
@@ -345,8 +342,8 @@ ul li {
 	<div id="list_main_node" class=div_in_profile>List that node is in </div>
 	<div id="measure_main_node" class=div_in_profile>Activity that is banned</div>-->
 	<form id="searchbox" action="">
-	<input id="search" type="text" placeholder="Type here">
-	<input id="submit" type="submit" value="Search">
+	<input id="search" type="text" placeholder="Search other entities">
+	<input id="submit" type="image" src="search.png">
 	</form>
     </div>
   </div>
@@ -383,7 +380,7 @@ ul li {
                 </div>
                 <div id="also_known_as_name_and " class=list_and_program_container >
                     <div id="aka" class=numListandaka>
-                     <label class="name_label">Also known as</label>
+                     <label class="name_label">Known names</label>
                     </div>
                     <div id="listAKA" class=line_by_line_small>
                     </div>

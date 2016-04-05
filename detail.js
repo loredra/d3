@@ -1,6 +1,7 @@
 var detail=d3.select("#detail_info");
+var firstLoad=true;
 function click(list) {
-
+    
  /////////////////////Return everything in svg to normal///////////////////
   vis=d3.selectAll(".highlight_circle");
 
@@ -48,9 +49,16 @@ function click(list) {
 	    d3.selectAll("li")
       .style("background","#cce5ff");
 
-  d3.select(this)
-      .style("background","#ffa366");  
-	  
+      if(firstLoad){
+  d3.select("#list").select("li")
+      .style("background","#ffa366");
+      firstLoad=false;
+	}
+	else
+	  {
+      d3.select(this)
+      .style("background","#ffa366");
+	}
     var listList;
     var numOfList;
 
