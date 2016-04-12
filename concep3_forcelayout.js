@@ -35,23 +35,6 @@
     
   var container = svg.append("g");
     
-//   var tip = d3.tip()
-//   .attr('class', 'd3-tip')
-//    .offset(function(d) {
-//     var coordinates = [0, 0];
-//      coordinates = d3.mouse(this);
-//     var x = coordinates[0]*zoom.scale();
-//      var y = coordinates[1]*zoom.scale();
-//     return x/2,y;
-//   })
-//   .offset([0, 0])
-//   .direction('e')
-//   .html(function(d) {
-//   return "<strong>Frequency:</strong> <span style='color:red'>" + "20" + "</span>";
-//   })
-  
-//   container.call(tip);
-
     function linkToolTip(link){
      
     var x1 = parseFloat(link.attr("x1"));
@@ -59,16 +42,9 @@
     var y1 = parseFloat(link.attr("y1"));
     var y2 = parseFloat(link.attr("y2"));
     var text=link.attr("type");
-    
-//     var coordinates = [0, 0];
-//     coordinates = d3.mouse(d3.select("#container"));
-//     
+        
     var x=(x1+x2)/2;
     var y=(y1+y2)/2;
-//       var coordinates = [0, 0];
-//       coordinates = d3.mouse(this);
-//       var x = coordinates[0];
-//       var y = coordinates[1];
       
          var tooltip = container
          .append("title")
@@ -141,9 +117,10 @@
 	.attr("y", -12)
 	.attr("width", "24px")
 	.attr("height", "24px");
-  vis=d3.selectAll(".highlight_circle");
-  vis.attr("transform", "scale(0.1,0.1)")
-  .attr("opacity",0);
+	
+    vis=d3.selectAll(".highlight_circle");
+    vis.attr("transform", "scale(0.1,0.1)")
+       .attr("opacity",0);
   
 ///////////////Translte selected node to middle////////////////////////	
   translateBeforeChose(node.x,node.y);
@@ -228,6 +205,7 @@
 	    .style("font-size", 15 + "px")
 	    .text(function(d){return d})
 	    .style("text-anchor", "start")
+	    .on("click",overlay)
         ;
         	var listOfAKA=d3.select("#listAKA").append("ul")
         .attr("class","ul_list_List")

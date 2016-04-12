@@ -1,5 +1,22 @@
 var detail=d3.select("#detail_info");
 var firstLoad=true;
+function overlay() {
+	el = d3.select("#overlay");
+	el.
+	style("visibility",
+	  (el.style("visibility") == "visible") ? "hidden" : "visible");
+	
+	el.select(".close")
+	.on("click",closeOverlay);
+	
+}
+function closeOverlay() {
+  
+	el = d3.select("#overlay");
+	d3.select(".close")
+	.on("click",el.style("visibility","hidden"));
+	
+}
 function click(list) {
     
  /////////////////////Return everything in svg to normal///////////////////
@@ -15,6 +32,7 @@ function click(list) {
 	.attr("width", "24px")
 	.attr("height", "24px");
 ///////////////////////////////////////////////////////////////////////////
+/////////////////////////Making the image bigger///////////////////////////
        var node=d3.selectAll(".node")
       .filter(function(d) { return d.id==list.id; })
 
@@ -34,7 +52,8 @@ function click(list) {
 	.attr("opacity",0.7);
 
       translateBeforeChose(node.datum().x,node.datum().y);
-
+///////////////////////////////////////////////////////////////////////////
+//////////////////////Populate content in to detail div/////////////////// 
          d3.selectAll(".detail_name").remove();
          d3.selectAll(".detail_address").remove();
          d3.selectAll(".ul_list_List").remove();
@@ -46,9 +65,10 @@ function click(list) {
 	  .attr("class","detail_address")
 	  .attr("position","relative");
 
-	    d3.selectAll("li")
+	  
+	d3.selectAll("li")
       .style("background","#cce5ff");
-
+///////////////First load then color the first node/////////////////////////
       if(firstLoad){
   d3.select("#list").select("li")
       .style("background","#ffa366");
@@ -59,13 +79,24 @@ function click(list) {
       d3.select(this)
       .style("background","#ffa366");
 	}
-    var listList;
+    var listList="";
     var numOfList;
 
 
-    try {
-	listList=node.datum().isListedIn.toString().split(",");
-    numOfList=listList.length;
+    try {listList1=node.datum().isListedIn;
+	
+      for(i in listList1){
+	listList=listList.concat(listList1[i].Name,",");
+	
+      }
+      // 	listList=node.datum().isListedIn
+// 	.each().Name.toString().split(",");
+      listList= listList.slice(0, -1);
+      listList=listList.split(",");
+      if(listList=="")
+	numOfList=0;
+	else
+   numOfList=listList.length;
 }
 catch(err) {
     numOfList=0;
@@ -88,7 +119,8 @@ catch(err) {  }
 	    .attr("class","listList")
 	    .style("font-size", 15 + "px")
 	    .text(function(d){return d})
-	    .style("text-anchor", "start");
+	    .style("text-anchor", "start")
+	    .on("click",overlay);
 
 	var listOfAKA=d3.select("#listAKA").append("ul")
         .attr("class","ul_list_List")
@@ -103,7 +135,7 @@ catch(err) {  }
 
 
       }
-
+//////////////////////////////////////////////////////////////////////////// 
 d3.json("pst2.json", function(error, graph) {
  if (error) throw error;
 

@@ -1,22 +1,44 @@
 {
   "nodes":[
     {"id":"0", "name":"ETCO INTERNATIONAL COMMODITIES LIMITED","type":"Company","trust":20,
-    "isListedIn":["USSDN","Canadian list"
-    ,"Dummy Name 5"
-    ,"Dummy Name 5"
-    ,"Dummy Name 5"
-    ,"Dummy Name 5"
-    ],
+    "isListedIn":[
+		  {"USSDN":[
+			  {"Name":"ETCO INTERNATIONAL COMMODITIES",
+			   "Address":"Address1, Street2, Building 3"
+			  },
+			  {"Name":"ETCO INTERNATIONAL COMMODITIES Name 2",
+			   "Address":"Address21, Street21, Building 31"
+			  }],
+		  "Name":"USSDN"  
+		  },
+		  {"Canadian List":[
+			  {"Name":"ETCO CANADIAN COMMODITIES Name 3",
+			   "Address":"Address111, Street222, Building 333"
+			  },
+			  {"Name":"ETCO CANADIAN COMMODITIES Name 4",
+			   "Address":"Address221, Street221, Building 321"
+			  }]
+			  ,
+		  "Name":"Canadian List"  
+		  }
+    
+		  ],
     "address":"Devonshire House, Devonshire Street 1 London GB",
-    "AKA":["ETCO INTERNATIONAL SMUGGLING COMPANY","Dummy1","Dummy2","Dummy3","Dummy4"
-    ,"Very Looooooooooooooooooooooooooooooooooooooooooooooooooooong Name","Dummy Name 5"
-    ,"Dummy Name 5"
-    ,"Dummy Name 5"
-    ,"Dummy Name 5"
+    "AKA":["ETCO INTERNATIONAL COMMODITIES"
+    ,"ETCO INTERNATIONAL COMMODITIES Name 2"
+    ,"ETCO CANADIAN COMMODITIES Name 3"
+    ,"ETCO CANADIAN COMMODITIES Name 4"
     ]
     },
     {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":30,
-    "isListedIn": ["Canadian List"],
+    "isListedIn": [
+		  {"USSDN Personal List":[
+			  {"Name":"Pinkerton the tormenter",
+			   "Address":"Address111, Street222, Building 333"
+			  }],
+		    "Name":"USSDN Personal List"  
+		  }
+		  ],
     "address":"Example2, Some fake address",
     "AKA":["Pinkerton the tormenter"]
      },
