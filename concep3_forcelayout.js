@@ -1,6 +1,6 @@
 
-  var width =d3.select("#associate_info_node").node().getBoundingClientRect().width;
-  var height =d3.select("#associate_info_node").node().getBoundingClientRect().height-26;
+  var width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
+  var height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
     
       
   var margin = {top: -1, right: -1, bottom: -1, left: -1};
@@ -10,8 +10,8 @@
   var isChosen=0;
   
   var force = d3.layout.force()
-      .charge(-1700)
-      .linkDistance(120)
+      .charge(-7700)
+      .linkDistance(70)
       .size([width, height]);
       
   var drag = force.drag()
@@ -34,32 +34,25 @@
       .on("dblclick.zoom", null);
     
   var container = svg.append("g");
+  
     
     function linkToolTip(link){
      
-    var x1 = parseFloat(link.attr("x1"));
-    var x2 = parseFloat(link.attr("x2"));
-    var y1 = parseFloat(link.attr("y1"));
-    var y2 = parseFloat(link.attr("y2"));
+//     var x1 = parseFloat(link.attr("x1"));
+//     var x2 = parseFloat(link.attr("x2"));
+//     var y1 = parseFloat(link.attr("y1"));
+//     var y2 = parseFloat(link.attr("y2"));
     var text=link.attr("type");
         
-    var x=(x1+x2)/2;
-    var y=(y1+y2)/2;
+//     var x=(x1+x2)/2;
+//     var y=(y1+y2)/2;
       
-         var tooltip = container
-         .append("title")
-         .text(text)
-	 .attr("class","tooltip")
-	 .style("background-color","black")
-	 .style("stroke","black")
-	 .style("color","white")
-         .attr("x", x+50)
-         .attr("y", y+10)
- 	 .attr("text-anchor", "middle")
-         .attr("id", "tooltip");  
+        tooltip.text(text);
+	tooltip.style("visibility","visible");
   }
   
   function zoomed() {
+//     container.attr("transform", "translate(0,0 )scale(1)");
     container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   }
   function dragstarted(d) {
@@ -151,9 +144,6 @@
 	.filter(function(d){
 	  return node.id== d.id});
 
-
-
-
      d3.select("#list")
 	.property("scrollTop",chosenItem.attr("id").toString().replace('index','')*19)
 	.selectAll("li")
@@ -163,60 +153,9 @@
 	  else
 	    return "#cce5ff";
 	});
-//////////////////////////////////////////////////////////////////7
-    d3.select(".detail_name").remove();
-    d3.select(".detail_address").remove();
-    d3.selectAll(".ul_list_List").remove();
+////////////////////////////Call function on detail.js////////////////////////////////	
+	populateDetailPage(node);
 
-   detail.select("#name").append("div").text(node.name)
-	  .attr("class","detail_name")
-	  .attr("position","relative");
-
-    detail.select("#address").append("div").text(node.address)
-	  .attr("class","detail_address")
-	  .attr("position","relative");
-
-      var listList;
-      var listAKA;
-       try {
-
-       listAKA=node.AKA.toString().split(",");
-            }
-            catch(err) {  }
-          try {
-
-     listList=node.isListedIn.toString().split(",");
-      numOfList=listList.length;
-            }
-            catch(err) { numOfList=0;  }
-
-
-
-        d3.select(".numOfList")
-	.text(numOfList);
-
-          var listOfList=d3.select("#listList").append("ul")
-        .attr("class","ul_list_List")
-        .selectAll("li")
-        .data(listList)
-	    .enter()
-	    .append("li")
-	    .attr("class","listList")
-	    .style("font-size", 15 + "px")
-	    .text(function(d){return d})
-	    .style("text-anchor", "start")
-	    .on("click",overlay)
-        ;
-        	var listOfAKA=d3.select("#listAKA").append("ul")
-        .attr("class","ul_list_List")
-        .selectAll("li")
-        .data(listAKA)
-	    .enter()
-	    .append("li")
-	    .attr("class","listAKA")
-	    .style("font-size", 15 + "px")
-	    .text(function(d){return d})
-	    .style("text-anchor", "start");
     }
 
 
@@ -248,16 +187,10 @@
    .startAngle(myScale(0)) 
    .endAngle(myScale(100));
    
+ 
+   container.attr("transform", "translate(0,0)scale(1)");
+   
 
-      var text = container.append("g").selectAll(".text")
-      .data(graph.nodes)
-      .enter().append("text")
-      .attr("class","text_svg")
-      .attr("dy", ".35em")
-      .style("font-size", 10 + "px")
-
-      text.text(function(d) { return d.name; })
-      .style("text-anchor", "start");
 
     var link = container.append("g").selectAll(".link")
 	.data(graph.links)
@@ -271,7 +204,10 @@
 	.on("mouseover",function(d){
 	  linkToolTip(d3.select(this));
 	})
-	.on("mouseout", function(d){d3.selectAll("#tooltip").remove();})
+	.on("mouseout", function(d){
+	  tooltip
+	.style("visibility", "hidden");})
+	.on("mousemove",mousemove)
 	.style("stroke-width", function(d) { return 6 })
 	.style("marker-end",  "url(#resolved)");
       
@@ -342,7 +278,15 @@
 	.attr("d",arc)
 	.attr("opacity",0);
 	
-		
+	      var text = container.append("g").selectAll(".text")
+      .data(graph.nodes)
+      .enter().append("text")
+      .attr("class","text_svg")
+      .attr("dy", ".35em")
+      .style("font-size", 10 + "px")
+
+      text.text(function(d) { return d.name; })
+      .style("text-anchor", "middle");	
 	
 	
     force
@@ -361,11 +305,9 @@
       .style("font-size", 10 + "px");
     
     change();
-    
 
-
-    node.append("title")
-	.text(function(d) { return d.name; });
+//     node.append("title")
+// 	.text(function(d) { return d.name; });
 	
 //     info_color_container=d3.select(".svg").append("g")
 //       .attr("class",".info_color_container");
@@ -418,6 +360,7 @@
       return o.source.index == node.index || o.target.index == node.index ? "red" : "#999"});
     
     tooltip.style("visibility", "visible");
+    tooltip.text(node.name);
             
     }
     
@@ -456,8 +399,6 @@
 	text_link.attr("x", function(d) { return (d.source.x+d.target.x)/2 + 3; })
 	    .attr("y", function(d) { return (d.source.y+d.target.y)/2; });
 
-	text.attr("x", function(d) { return d.x+26; })
-	    .attr("y", function(d) { return d.y; });
 
 	link.attr("x1", function(d) { return d.source.x; })
 	    .attr("y1", function(d) { return d.source.y; })
@@ -467,6 +408,9 @@
 
 	  node.attr("transform", function(d) { 
 	    return "translate(" + d.x + "," + d.y + ")"; });
+	  
+	text.attr("x", function(d) { return d.x; })
+	    .attr("y", function(d) { return d.y+38; });
 
 // 	    .attr("transform", function(d){return "translate(" + d.width/2 + "," + -d.height/2 + ")"});
 	    
