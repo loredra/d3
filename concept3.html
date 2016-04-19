@@ -1,39 +1,173 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style>
+.table-fill {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin: auto;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+table{
+table-layout:auto;
+ text-align:left;
+ resize:auto;
+}
+ 
+th {
+  color:#D5DDE5;
+  background:#1b1e24;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:15px;
+  font-weight: 100;
+  padding:10px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+
+}
+
+/*th:first-child {
+  border-top-left-radius:3px;
+}
+ 
+th:last-child {
+  border-top-right-radius:3px;
+  border-right:none;
+}*/
+  
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#666B85;
+  font-size:13px;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+ 
+tr:hover td {
+  background:#ffa366;
+  color:#000000;
+  border-bottom: 1px solid #22262e;
+}
+ 
+tr:first-child {
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+ 
+tr:nth-child(odd) td {
+  background:#EBEBEB;
+}
+ 
+tr:nth-child(odd):hover td {
+  background:#ffa366 ;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius:3px;
+}
+ 
+tr:last-child td:last-child {
+  border-bottom-right-radius:3px;
+}
+ 
+td {
+color:#000000;
+  background:#FFFFFF;
+  padding:10px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:13px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+  overflow: hidden;
+  max-width: 1em;
+  word-wrap:break-word;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+
 #overlay {
      visibility: hidden;
      position: absolute;
      left: 0px;
      top: 0px;
      width:100%;
-     height:1080px;
+     height:110%;
     
      z-index: 1000;
      background-color:rgba(0, 0, 0, 0.5);
+     overflow:auto;
      
 }
-#overlay div {
-     width:600px;
-     height:400px;
+#overlay_window{
+     width:900px;
+     height:600px;
      margin:auto;
      background-color: #fff;
      border:1px solid #000;
-     padding:15px;
+     padding:10px;
      text-align:center;
      opacity:1;
-      position:fixed;
- left:50%;
- top:50%;
- margin-left:-300px;
- margin-top:-200px;
+     position:fixed;
+     left:42%;
+     top:45%;
+     margin-left:-300px;
+     margin-top:-200px;
+     overflow:auto;
+}
+#overlay div.overlay_container{
+     width:100%;
+     padding:3px 3px 20px 3px;
+     float:left;
+    
+}
+#overlay .close {
+    float: right;
+
 }
 .close {
 position:relative;
     color: #aaa;
-    float: right;
+    float: left;
     font-size: 28px;
     font-weight: bold;
+    padding-right: 3px;
 }
 .close:hover,
 .close:focus {
@@ -44,7 +178,7 @@ position:relative;
 div.tooltip {
     visibility:hidden;
     background: lightblue;
-    border:solid gray;
+    border:solid 0.5px gray;
     position: absolute;
 }
 #searchbox {
@@ -371,6 +505,7 @@ ul li {
 </style>
 <head>
 <script type="text/javascript"src="d3.min.js"></script>
+<!--<script type="text/javascript"src="colResizable-1.5.min.js"></script>-->
 </head>
 <body>
 <div class="tooltip">Tipsy!</div>
@@ -394,7 +529,6 @@ ul li {
   </div>
     <div id="associate_info" class=associate_info>
         <div id="associate_info_node" class=associate_info_node>
-	  <span class=close style="font-size:small;"> < </span>
             <div id="detail_info" class=line_by_line>
             
                 <div id="name_and_address_container" class=name_and_address_container>
@@ -446,6 +580,7 @@ ul li {
         </div>	
         <div id="visualization" class=associate_info_node>
 	    <div class=toolbox>
+	      <span id="expand_forcelayout" onclick="expandForceLayout()" class=close style="font-size:18px;"> <<< </span>
 	      <label class=checkboxname><input id="node_check_box" type="checkbox"> Hide node's name</label>
 	      <label class=checkboxlink><input id="link_check_box" type="checkbox" checked=''> Hide link's type</label>
 	     </div>
@@ -456,9 +591,105 @@ ul li {
   </div>
 </div>
 <div id="overlay">
-     <div>
+  <div id="overlay_window">
+     <div class=overlay_container>
 	  <span class="close">x</span>
-          <p>THE NAME OF THE LIST</p>
+          <p>INFORMATION IN THE LIST</p>
+     </div>
+      <div class=overlay_container>
+      <span>Known Names</span>
+<table style="width:100%">
+  <tr>
+    <th>Full Name</th>
+    <th>Last Name</th>		
+    <th>Middle Name</th>
+    <th>First Name</th>
+    <th>Source</th>
+  </tr>
+  <tr>
+    <td>Smith Jill</td>
+    <td>Jill</td>
+    <td></td>		
+    <td>Smith</td>
+  </tr>
+    <tr>
+    <td>Smith Jill</td>
+    <td>Jill</td>
+    <td></td>		
+    <td>Smith</td>
+  </tr>
+    <tr>
+    <td>Smith Jill</td>
+    <td>Jill</td>
+    <td></td>		
+    <td>Smith</td>
+  </tr>
+    <tr>
+    <td>Smith Jill</td>
+    <td>Jill</td>
+    <td></td>		
+    <td>Smith</td>
+  </tr>
+</table>
+	</div>
+	
+	<div class=overlay_container>
+	<span>Known Addresses</span>
+<table style="width:100%">
+  <tr>
+    <th>Country</th>		
+    <th>City</th>
+    <th>District</th>
+    <th>Zip</th>
+    <th>Street</th>
+    <th>House Number</th>		
+    <th>Building</th>
+    <th>Room number</th>
+    <th>Sources</th>
+  </tr>
+  <tr>
+    <td>Germany</td>
+    <td>Jenaaaaaaaaaaaaaaaaaaa</td>
+    <td>Beuternbug</td>		
+    <td></td>
+    <td>Blabla street</td>
+    <td>Some house number very longofndjk fdjsbgk fjusgs fgsuifbs gfsugf</td>		
+    <td>Center</td>
+    <td>1</td>
+    <td>76RF 67059</td>
+  </tr>
+    <tr>
+    <td>Germany</td>
+    <td>Jena</td>
+    <td>Beuternbug</td>		
+    <td></td>
+    <td>Blabla street</td>
+    <td>Some house number</td>		
+    <td>Center</td>
+    <td>1</td>
+    <td>76RF 67059</td>
+  </tr>
+    <tr>
+    <td>Smith Jill</td>
+    <td>Jill</td>
+    <td></td>		
+    <td>Smith</td>
+  </tr>
+    <tr>
+    <td>Smith Jill</td>
+    <td>Jill</td>
+    <td></td>		
+    <td>Smith</td>
+  </tr>
+    <tr>
+    <td>Smith Jill</td>
+    <td>Jill</td>
+    <td></td>		
+    <td>Smith</td>
+  </tr>
+</table>
+	</div>
+	
      </div>
 </div>
 </body>

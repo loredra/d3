@@ -1,5 +1,7 @@
 var detail=d3.select("#detail_info");
 var firstLoad=true;
+
+
 function populateDetailPage(node){
   
   //////////////////////Populate content in to detail div/////////////////// 
@@ -89,8 +91,8 @@ catch(err) {  }
 }
 function overlay() {
 	el = d3.select("#overlay");
-	el.
-	style("visibility",
+	el
+	.style("visibility",
 	  (el.style("visibility") == "visible") ? "hidden" : "visible");
 	
 	el.select(".close")

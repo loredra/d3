@@ -1,7 +1,7 @@
 
   var width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
   var height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
-    
+  var IsExpanded=false;  
       
   var margin = {top: -1, right: -1, bottom: -1, left: -1};
 
@@ -36,17 +36,58 @@
   var container = svg.append("g");
   
     
+    function expandForceLayout(){
+      if(IsExpanded==false){
+      d3.select("#associate_info_node").
+      style("display","none");
+      
+  var width =d3.select("#associate_info").node().getBoundingClientRect().width;
+  var height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
+      svg
+      .attr("width",width)
+      .attr("height",height);
+      
+      d3.select("#visualization")
+	.style("width","100%")
+	.style("max-width","100%");
+      
+      d3.select("#trustScore")
+      .attr("transform","translate(1290,0)");
+      
+      d3.select("#expand_forcelayout")
+      .text(">>>");
+      IsExpanded=true;
+      }
+      else{
+	collapseForceLayout();
+	}
+     }
+     function collapseForceLayout(){
+      
+      d3.select("#associate_info_node").
+      style("display",null);
+      
+  var width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
+  var height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
+      svg
+      .attr("width",width)
+      .attr("height",height);
+      
+      d3.select("#visualization")
+	.style("width","50%")
+	.style("max-width","50%");
+      
+      d3.select("#trustScore")
+      .attr("transform","translate(570,0)");
+      
+      d3.select("#expand_forcelayout")
+      .text("<<<");
+      IsExpanded=false;
+     }
+  
     function linkToolTip(link){
      
-//     var x1 = parseFloat(link.attr("x1"));
-//     var x2 = parseFloat(link.attr("x2"));
-//     var y1 = parseFloat(link.attr("y1"));
-//     var y2 = parseFloat(link.attr("y2"));
-    var text=link.attr("type");
-        
-//     var x=(x1+x2)/2;
-//     var y=(y1+y2)/2;
-      
+    var text=link.attr("type");      
         tooltip.text(text);
 	tooltip.style("visibility","visible");
   }
@@ -319,6 +360,7 @@
 //       .attr("class",".info_color_list")
 //       .attr("data-legend",function(d) { return d.name})
   var trust=d3.select(".svg").append("g")
+      .attr("id","trustScore")
       .attr("transform","translate(570,0)");
       
       trust.append("rect")
