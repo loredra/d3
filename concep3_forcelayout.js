@@ -41,8 +41,8 @@
       d3.select("#associate_info_node").
       style("display","none");
       
-  var width =d3.select("#associate_info").node().getBoundingClientRect().width;
-  var height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
+   width =d3.select("#associate_info").node().getBoundingClientRect().width;
+   height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
       svg
       .attr("width",width)
       .attr("height",height);
@@ -67,8 +67,8 @@
       d3.select("#associate_info_node").
       style("display",null);
       
-  var width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
-  var height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
+   width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
+  height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
       svg
       .attr("width",width)
       .attr("height",height);
@@ -324,7 +324,7 @@
       .enter().append("text")
       .attr("class","text_svg")
       .attr("dy", ".35em")
-      .style("font-size", 10 + "px")
+      .style("font-size", 13 + "px")
 
       text.text(function(d) { return d.name; })
       .style("text-anchor", "middle");	

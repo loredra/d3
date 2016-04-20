@@ -9,7 +9,8 @@
 			  {"Name":"ETCO INTERNATIONAL COMMODITIES Name 2",
 			   "Address":"Address21, Street21, Building 31"
 			  }],
-		  "Name":"USSDN"  
+		  "Name":"USSDN",
+		  "Measure":["arms","technical","money"]
 		  },
 		  {"Canadian List":[
 			  {"Name":"ETCO CANADIAN COMMODITIES Name 3",
@@ -75,6 +76,8 @@
     ,"Address111, Street222, Building 333"
     ,"Address221, Street221, Building 321"
     ,"Address which is not in List"
+    ],
+    "AllMeasures":["arms","technical","money"
     ]
     },
     {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":30,
