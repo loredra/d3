@@ -60,19 +60,31 @@ function populateDetailPage(node){
 catch(err) {
     numOfList=0;
 }
-d3.select(".numOfList")
+d3.select("#numOfList")
 	.text(numOfList);
-try {
-    var listAKA=node.AKA;
-// 	listAKA=listAKA.split(",");
-    }
-catch(err) {  }
 
+	try {
+    var listAKA=node.AKA;
+    numOfAKA=listAKA.length;
+
+    }
+catch(err) {
+  numOfAKA=0;  
+  
+}
+d3.select("#numOfName")
+	.text(numOfAKA);
 try {
     var listKA=node.KnownAddress;
-// 	listKA=listKA.split(",");
+    numOfAddress=listKA.length;
+  ;
     }
-catch(err) {  }
+catch(err) { 
+   numOfAddress=0;
+}
+
+  d3.select("#numOfAddress")
+	.text(numOfAddress)
 
 ////////////////////////////////////////////////////////////////////
 	var listOfList=d3.select("#listList").append("ul")
