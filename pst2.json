@@ -1,6 +1,6 @@
 {
   "nodes":[
-    {"id":"30", "name":"ETCO INTERNATIONAL COMMODITIES LIMITED","type":"Company","trust":20,
+    {"id":"30", "name":"ETCO INTERNATIONAL COMMODITIES LIMITED","type":"Company","trust":20,"status":"Active",
     "isListedIn":[
 		  {"USSDN":[
 			  {"Name":"ETCO INTERNATIONAL COMMODITIES",
@@ -57,6 +57,7 @@
 		  }
     
 		  ],
+	"Company Register ID":"24601",
     "address":"Devonshire House, Devonshire Street 1 London GB",
     "AKA":["ETCO INTERNATIONAL COMMODITIES"
     ,"ETCO INTERNATIONAL COMMODITIES Name 2"
@@ -80,7 +81,7 @@
     "AllMeasures":["arms","technical","money"
     ]
     },
-    {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":30,
+    {"id": "1","name":"PINKERTON, Steven Thomas","type":"human","trust":30,"status":"Active",
     "isListedIn": [
 		  {"USSDN Personal List":[
 			  {"Name":"Pinkerton the tormenter",
@@ -92,23 +93,23 @@
     "address":"Example2, Some fake address",
     "AKA":["Pinkerton the tormenter"]
      },
-    {"id": "2","name":"DIAZ ALFONSO, Liudis","type":"human","trust":25,
+    {"id": "2","name":"DIAZ ALFONSO, Liudis","type":"human","trust":25,"status":"Active",
     "isListedIn":["USSDN","Canadian list","Random List 3"],
     "AKA":["Lionel Messi","Lusen Carf","Dummy Name 1","Dummy Name 2","Dummy Name 3","Dummy Name 4","Dummy Name 5"]
       },
-    {"id": "3","name":"PEREZ GUILLAMA, Osmani De La Caridad","type":"human","trust":80},
-    {"id": "4","name":"RODRIGUEZ DELGADO, Minerva Aleida","type":"human","trust":80},
-    {"id": "5","name":"WILSON GREEN PROPERTY LIMITED","type":"Company","trust":80},
-    {"id": "6","name":"WATSON, Caroline","type":"human","trust":80},
-    {"id": "7","name":"UK GLOBAL COMMODITIES LIMITED","type":"Company","trust":80},
-    {"id": "8","name":"ALL WORLD FOODS LIMITED","type":"Company","trust":80},
-    {"id": "9","name":"DA SILVA, Jose Antonio Goncalves","type":"human","trust":80},
-    {"id": "10","name":"MUSSI VAZQUEZ, Eidel Manuel","type":"human","trust":80},
-    {"id": "11","name":"Mother Company","type":"Company","trust":80},
+    {"id": "3","name":"PEREZ GUILLAMA, Osmani De La Caridad","type":"human","trust":80,"status":"Inactive"},
+    {"id": "4","name":"RODRIGUEZ DELGADO, Minerva Aleida","type":"human","trust":80,"status":"Active"},
+    {"id": "5","name":"WILSON GREEN PROPERTY LIMITED","type":"Company","trust":80,"status":"Active"},
+    {"id": "6","name":"WATSON, Caroline","type":"human","trust":80,"status":"Active"},
+    {"id": "7","name":"UK GLOBAL COMMODITIES LIMITED","type":"Company","trust":80,"status":"Active"},
+    {"id": "8","name":"ALL WORLD FOODS LIMITED","type":"Company","trust":80,"status":"Active"},
+    {"id": "9","name":"DA SILVA, Jose Antonio Goncalves","type":"human","trust":80,"status":"Active"},
+    {"id": "10","name":"MUSSI VAZQUEZ, Eidel Manuel","type":"human","trust":80,"status":"Active"},
+    {"id": "11","name":"Mother Company","type":"Company","trust":80,"status":"Active"},
     {"id":"12", "name":"ETCO INTERNATIONAL COMPANY LIMITED","type":"Company","trust":50,
-    "isListedIn":["USSDN"],
+    "isListedIn":["USSDN"],"status":"Active",
     "address":"Kanda Nishiki Cho 1-5 Housenumber Kawabe building"   },
-      {"id":"13", "name":"ETCO China INTERNATIONAL Trading COMPANY LIMITED","type":"Company","trust":50,
+      {"id":"13", "name":"ETCO China INTERNATIONAL Trading COMPANY LIMITED","type":"Company","trust":50,"status":"Inactive",
     "isListedIn":["Anti-Dumping List"],
     "address":"Somewhere in China, Kunfu Panda 3",
     "AKA":["ETCO Industrial"]   }
@@ -135,6 +136,7 @@
 "level_trust":[
 {"Message":"Dangerous","color":"red"},
 {"Message":"Shady Business","color":"yellow"},
-{"Message":"Safe for now","color":"green"}
+{"Message":"Safe for now","color":"green"},
+{"Message":"Inactive","color":"grey"}
 ]
 }

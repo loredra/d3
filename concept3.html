@@ -180,6 +180,7 @@ div.tooltip {
     background: lightblue;
     border:solid 0.5px gray;
     position: absolute;
+    white-space: pre-line;
 }
 #searchbox {
     top: 50%;
@@ -187,10 +188,10 @@ div.tooltip {
     display: inline-block;
     overflow: hidden;
  /* Clear floats */
-    width: 500px;
+ 
     height: 25px;
     margin-top: 25px;
-    padding: 10px;
+    padding:8px;
     
 }
 
@@ -203,8 +204,8 @@ div.tooltip {
    font-size: 20px;
     width: 380px;
     height: 23px;
-    padding: 5px 9px;
-    border: 1px solid #a4c3ca;
+    padding: 5px 3px;
+    border: 0.1em solid rgba(84, 84, 62, .2);
     background: #f1f1f1;
     box-shadow: 0 1px 3px rgba(0, 0, 0, .25) inset, 0 1px 0 rgba(255, 255, 255, 1);
 }
@@ -212,14 +213,13 @@ div.tooltip {
 /* ----------------------- */
 
 #submit {
-padding-left:5px;
 padding-top:auto;
     position: relative;
   cursor:pointer;
     border:none;
     width:35px;
     height:35px;
-
+  background: ;
     
   
 }
@@ -251,6 +251,7 @@ padding-top:auto;
 body {
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
     margin: 0;
+   
     background-color: #f6f6f6;
 }
 
@@ -366,6 +367,7 @@ overflow:auto;
     height: 20%;
     padding-top: 10px;
     text-align: center;
+       visibility:visible;
 }
 
 .measure_label {
@@ -377,6 +379,11 @@ overflow:auto;
 #detail_info {
     width: 100%;
     height: 70%;
+  visibility: hidden;
+}
+#detail_info:hover {
+
+  visibility: visible;
 }
 
 #name_and_address_container {
@@ -394,12 +401,14 @@ overflow:auto;
     /*max-height: 26%; */
     padding-top: 10px;
     padding-bottom: 5px;
+    visibility:visible;
 }
 
 .nameandAddress {
     width: 50%;
     margin: 15px 5px 15px 15px;
     text-align: left;
+        visibility:visible;
 }
 
 .line_by_line_small {
@@ -430,7 +439,10 @@ overflow:auto;
 
 .line_by_line {
     overflow-y: auto;
+
+
 }
+
 /*#listList{
 margin: 17px 2px 2px 2px;
 }*/
@@ -524,9 +536,10 @@ ul li {
 	<div id="list_main_node" class=div_in_profile>List that node is in </div>
 	<div id="measure_main_node" class=div_in_profile>Activity that is banned</div>-->
 	<form id="searchbox" action="">
-	<input id="search" type="text" placeholder="Search other entities">
+	<input id="search" type="text" placeholder="...">
 	<input id="submit" type="image" src="search.png">
 	</form>
+	<text>Advanced Search</text>
     </div>
   </div>
     <div id="associate_info" class=associate_info>
@@ -545,20 +558,23 @@ ul li {
 			<div id="measure_label" class=measure_label>
                        <label >Measured against this entity </label>
                         <div class=measure>
-                         
-                      <img class="measure_icon" src="arms.png"/>
-                      <img class="measure_icon" src="technical.png"/>
-                      <img class="measure_icon" src="money.png"/>
-		       <img class="measure_icon" src="arms.png"/>
-                      <img class="measure_icon" src="technical.png"/>
-                      <img class="measure_icon" src="money.png"/>
                         </div>
                  </div>
                         
                 </div>
+                
+                <div id="name_and_address_container" class=name_and_address_container>
+                    <div id="name" class=nameandAddress>
+                     <label class="name_label">Company Register </label>
+                    </div>
+                    <div id="address" class=nameandAddress>
+                     <label class="address_label">Address </label>
+                    </div>
+                </div>
+                
                 <div id="list_and_program_container" class=list_and_program_container>
                      <div id="numList" class=numListandaka>
-                     <label>Mentioned in <label class=numOfList></label> Lists
+                     <label>Mentioned in <label class=numOfList></label> Sanction Lists
                      </label>
                      </div>
                      <div id="listList" class=line_by_line_small>

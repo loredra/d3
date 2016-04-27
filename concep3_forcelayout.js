@@ -1,11 +1,10 @@
 
   var width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
-  var height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
+  var height =d3.select("#associate_info").node().getBoundingClientRect().height;
   var IsExpanded=false;  
       
   var margin = {top: -1, right: -1, bottom: -1, left: -1};
 
-  var trustData={red: "Bad business", yellow: "Shady connection", green:"Safe for now"};
   
   var isChosen=0;
   
@@ -42,7 +41,7 @@
       style("display","none");
       
    width =d3.select("#associate_info").node().getBoundingClientRect().width;
-   height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
+   height =d3.select("#associate_info").node().getBoundingClientRect().height;
       svg
       .attr("width",width)
       .attr("height",height);
@@ -52,7 +51,7 @@
 	.style("max-width","100%");
       
       d3.select("#trustScore")
-      .attr("transform","translate(1290,0)");
+      .attr("transform","translate(1290,-14)");
       
       d3.select("#expand_forcelayout")
       .text(">>>");
@@ -68,7 +67,7 @@
       style("display",null);
       
    width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
-  height =d3.select("#associate_info").node().getBoundingClientRect().height-26;
+  height =d3.select("#associate_info").node().getBoundingClientRect().height;
       svg
       .attr("width",width)
       .attr("height",height);
@@ -78,7 +77,7 @@
 	.style("max-width","50%");
       
       d3.select("#trustScore")
-      .attr("transform","translate(570,0)");
+      .attr("transform","translate(570,-14)");
       
       d3.select("#expand_forcelayout")
       .text("<<<");
@@ -124,17 +123,23 @@
     .attr("transform", "translate("+ dcx + "," + dcy  + ")scale(" + zoom.scale() + ")");
 
   }
-  function trust_to_color(trust){
-    
+  function trust_to_color(trust,status){
+   try{
+    if(status=="Inactive")
+     return"grey";
+   }
+   catch(err){
+     
+  }
    if(trust>=80){
      return "green";
   
      }
-   if(trust>=30 && trust<=79){
+   else if(trust>=30 && trust<=79){
      return "yellow";
 
    }
-   if(trust<=30)  {
+   else if(trust<=30)  {
      return "red";
      
   }  
@@ -300,7 +305,7 @@
 	var trust_cirlce=node
 	.append("circle")
 	.attr("r",26)
-	.style("fill", function(d) { return trust_to_color(d.trust) });
+	.style("fill", function(d) { return trust_to_color(d.trust,d.status) });
 	
 	var image_node=node
 	.append("image")
@@ -361,11 +366,11 @@
 //       .attr("data-legend",function(d) { return d.name})
   var trust=d3.select(".svg").append("g")
       .attr("id","trustScore")
-      .attr("transform","translate(570,0)");
+      .attr("transform","translate(570,-14)");
       
       trust.append("rect")
-      .attr("width","180px")
-      .attr("height","110px")
+      .attr("width",60*graph.level_trust.length)
+      .attr("height",27*graph.level_trust.length)
       .style("fill","#eaf0fa");
       
   var trust_draw=trust.selectAll()
@@ -373,13 +378,14 @@
       .enter();
       
       trust_draw.append("text")
-      .attr("transform",function(d,i){return "translate(22,"+33*(i+1)+")" })
+      .attr("transform",function(d,i){return "translate(22,"+25*(i+1)+")" })
       .text(function(d) { return d.Message})
-      .style("fill","black");
+      .style("fill","black")
+      .style("dominant-baseline","central");
       
            trust_draw.append("circle")
       .attr("r",10)
-      .attr("transform",function(d,i){return "translate(10,"+30*(i+1)+")" })
+      .attr("transform",function(d,i){return "translate(10,"+25*(i+1)+")" })
       .style("fill",function(d) { return d.color});
     
     function mouseout(node) {
@@ -401,10 +407,22 @@
     link.style("stroke", function(o) {
       return o.source.index == node.index || o.target.index == node.index ? "red" : "#999"});
     
+    try{
+      statusColor="red";
     tooltip.style("visibility", "visible");
-    tooltip.text(node.name);
-            
-    }
+    tooltip.html(node.name+
+    "<br>Type: "+node.type+
+    "<br>Status: <span style='color: "+statusColor+"'>"+node.status+"</span>"+
+    "<br>Listed in "+node.isListedIn.length+" Sanction Lists");
+        }
+        catch(err){
+	tooltip.style("visibility", "visible");
+	tooltip.html(node.name);
+	  
+	}
+	}
+    
+    
     
     /////Checkbox///////////////////////////////////////////////////////////
     d3.select("#node_check_box").on("change", change);
