@@ -23,7 +23,9 @@
 	<input id="search" type="text" placeholder="">
 <!--	<button id="submit" type="image">-->
 	</form>
+	<div class=advanced_search>
 	<text>Advanced Search</text>
+	</div>
     </div>
   </div>
     <div id="associate_info" class=associate_info>
@@ -35,7 +37,7 @@
                      <label class="name_label">Name </label>
                     </div>
                     <div id="address" class=nameandAddress>
-                     <label class="address_label">Address </label>
+                     <label class="address_label">Primary Address </label>
                     </div>
                 </div>
                 <div id=measure_detail class=measure_detail>
@@ -55,6 +57,13 @@
                      <label class="address_label">Country </label>
                     </div>
                 </div>
+                     <div id=measure_detail class=measure_detail>
+			<div id="measure_label" class=measure_label>
+                       <label >Subcribe to this entity </label>
+                        <div class=measure>
+                        </div>
+                 </div>
+                 </div>
                 
                 <div id="list_and_program_container" class=list_and_program_container>
                      <div id="numList" class=numListandaka>
@@ -78,6 +87,13 @@
                     <div id="listKA" class=line_by_line_small>
                     </div>
                 </div>
+                   <div id="related_sanction_entity" class=list_and_program_container >
+                    <div id="related_sanction_entity" class=numListandaka>
+                     <label class="name_label">Have relationship with <label id="numOfRelatedSanctionEntity" class=numOfList></label> entities on Sanction List</label>
+                    </div>
+                    <div id="listSE" class=line_by_line_small>
+                    </div>
+                </div>
             </div>
 	   <div id="list" class=line_by_line> 
             
@@ -88,6 +104,7 @@
 	      <span id="expand_forcelayout" onclick="expandForceLayout()" class=close style="font-size:18px;"> <<< </span>
 	      <label class=checkboxname><input id="node_check_box" type="checkbox"> Hide node's name</label>
 	      <label class=checkboxlink><input id="link_check_box" type="checkbox" checked=''> Hide link's type</label>
+	      <label class=buttonroot><input id="root_button" type="checkbox" > Return to primary search</label>
 	     </div>
 	      <script type="text/javascript"src="concep3_forcelayout.js"></script>
 	      <script type="text/javascript"src="detail.js"></script>
@@ -102,7 +119,7 @@
           <p>INFORMATION IN THE LIST</p>
      </div>
       <div class=overlay_container>
-      <span>Known Names</span>
+      <div class=heading>Known Names</div>
 <table style="width:100%">
   <tr>
     <th>Full Name</th>
@@ -139,7 +156,7 @@
 	</div>
 	
 	<div class=overlay_container>
-	<span>Known Addresses</span>
+	<div class=heading>Known Addresses</div>
 <table style="width:100%">
   <tr>
     <th>Country</th>		
@@ -204,7 +221,30 @@
     <td>76RF 67059</td>
   </tr>
 </table>
-	</div>
+</div>
+<div class=overlay_container>
+ <div class=heading>General Information</div>
+ <div class=general_info_container>
+  <div class=general_info>
+ This Company is really dangerous blalbalabl fsibhuijkg fsughuigf gfuihfjksh   isdhfsdfhsd fihsdfsdhfdbsf 343tz27bdbds fsfds
+ </div>
+  <div class=general_info>
+ Expiration Date is 2024
+ </div>
+  <div class=general_info>
+ I see death people
+ </div>
+   <div class=general_info>
+ This Company is really dangerous blalbalabl 
+ </div>
+  <div class=general_info>
+ Expiration Date is 2024
+ </div>
+  <div class=general_info>
+ I see death people
+ </div>
+ </div>
+ </div>
 	
 	
      </div>

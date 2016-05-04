@@ -10,7 +10,8 @@
 			   "Address":"Address21, Street21, Building 31"
 			  }],
 		  "Name":"USSDN",
-		  "Measure":["arms","technical","money"]
+		  "Measure":["arms","technical","money"],
+		  "General Information":["This Company is really dangerous","Expiration Date is 2024", "I see death people"]
 		  },
 		  {"Canadian List":[
 			  {"Name":"ETCO CANADIAN COMMODITIES Name 3",
