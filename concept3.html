@@ -7,8 +7,40 @@
 </head>
 <body>
 <div class="tooltip">Tipsy!</div>
-<div id="header" class=header> This is Header and Navigation bar
-  <h1></h1>
+<div id="header" class=header>
+  <div id="logo">
+  </div>
+  <div id="navigation_and_search_container">
+      <div id="search_and_acc_container" class=header_container>
+	  <div id="acc">
+	      Account@pst.ag
+	  </div>
+	  <div id="search_container">
+	  
+	  <form id="searchbox" action="">
+	  <input id="search" type="text" placeholder="">	  
+	  </form>
+	   <div class=advanced_search onclick="showAdvancedSearch()">
+	  Advanced Search
+	  </div>
+	 </div>
+      </div>
+      <div id="navigation_container" class=header_container>
+	<div id="dashboard" class=navigation_section>
+	Dashboard
+	</div>
+	<div id="exchange_rate" class=navigation_section>
+	Exchange Rate
+	</div>
+	<div id="business_partner" class=navigation_section>
+	Business Partner
+	</div>
+	<div id="black_list" class=navigation_section>
+	Black List
+	</div>
+      </div>
+  </div>
+  
 </div>
 
 <div id="main_layout" class=layout>
@@ -19,13 +51,13 @@
 	<div id="address_main_node" class=div_in_profile>Address of the node</div>
 	<div id="list_main_node" class=div_in_profile>List that node is in </div>
 	<div id="measure_main_node" class=div_in_profile>Activity that is banned</div>-->
-	<form id="searchbox" action="">
+	<!--<form id="searchbox" action="">
 	<input id="search" type="text" placeholder="">
 <!--	<button id="submit" type="image">-->
-	</form>
+	<!--</form>
 	<div class=advanced_search>
 	<text>Advanced Search</text>
-	</div>
+	</div>-->
     </div>
   </div>
     <div id="associate_info" class=associate_info>

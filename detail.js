@@ -1,7 +1,43 @@
 var detail=d3.select("#detail_info");
 var firstLoad=true;
+var isAdvancedSearchClose=true;
+var isFirstAdvancedSearchOpen=true;
 
-
+function showAdvancedSearch(){
+  if(isFirstAdvancedSearchOpen){
+    advanced_search=d3.select("#main_layout").insert("div", ":first-child");
+    
+    advanced_search
+    .attr("class","advanced_search_collapsible")
+    .style("height","100px")
+    .style("max-width","1440px")
+    .style("margin","0 auto");
+    
+    advanced_search.append("div")
+    .attr("class","filter")
+    .attr("id","sanction_filter");
+    
+     advanced_search.append("div")
+    .attr("class","filter")
+    .attr("id","country_filter");
+    
+     advanced_search.append("div")
+    .attr("class","filter")
+    .attr("id","city_filter");
+    
+    isFirstAdvancedSearchOpen=false;
+    }
+  if(isAdvancedSearchClose){
+    d3.select(".advanced_search_collapsible")
+    .style("display","");
+    isAdvancedSearchClose=false;
+  }
+  else{
+    d3.select(".advanced_search_collapsible")
+      .style("display","none");
+      isAdvancedSearchClose=true;
+      }
+}
 function populateDetailPage(node){
   
   //////////////////////Populate content in to detail div/////////////////// 
