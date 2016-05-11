@@ -2,28 +2,75 @@ var detail=d3.select("#detail_info");
 var firstLoad=true;
 var isAdvancedSearchClose=true;
 var isFirstAdvancedSearchOpen=true;
+dummyData = [   
+{"name":"USSDN"},
+{"name":"CFDDSAC"},
+{"name":"CSFSDADSA"},
+{"name":"CSFDSFSS" } ];
 
 function showAdvancedSearch(){
   if(isFirstAdvancedSearchOpen){
     advanced_search=d3.select("#main_layout").insert("div", ":first-child");
     
     advanced_search
-    .attr("class","advanced_search_collapsible")
-    .style("height","100px")
-    .style("max-width","1440px")
-    .style("margin","0 auto");
+    .attr("class","advanced_search_collapsible");
     
-    advanced_search.append("div")
+    
+    black_list_filter=advanced_search
+    .append("div")
+    .attr("class","filter")
+    .attr("id","black_list_filter");
+    
+    black_list_filter
+    .append("span")
+    .attr("class","filter_label")
+    .text("Black List");
+    
+    black_list_filter
+    .append("div")
+    .attr("class","criteria_container")
+    .append("div")
+    .attr("class","criteria")
+    .text("This is a 65 characters long and it is the same as average list name");
+    
+    sanction_filter=advanced_search.append("div")
     .attr("class","filter")
     .attr("id","sanction_filter");
     
-     advanced_search.append("div")
+    sanction_filter
+    .append("span")
+    .attr("class","filter_label")
+    .text("Sanction List");
+    
+    sanction_filter
+    .append("div")
+    .attr("class","criteria_container");
+    
+    sanction_filter.select(".criteria_container").selectAll("div")
+    .data(dummyData)
+    .enter()
+    .append("div")
+    .attr("class","criteria")
+    .text(function(d){ return d.name; });
+    
+     country_filter=advanced_search
+    .append("div")
     .attr("class","filter")
     .attr("id","country_filter");
     
-     advanced_search.append("div")
+    country_filter
+    .append("span")
+    .attr("class","filter_label")
+    .text("Country");
+    
+     city_filter=advanced_search
+    .append("div")
     .attr("class","filter")
     .attr("id","city_filter");
+    
+    city_filter.append("span")
+    .attr("class","filter_label")
+    .text("City");
     
     isFirstAdvancedSearchOpen=false;
     }

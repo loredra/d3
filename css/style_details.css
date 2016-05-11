@@ -268,10 +268,18 @@ body {
     background-size: 50px 50px;
 }
 
-label {
+label,.name_label {
     font-weight: bold;
     text-align: center;
     color: #4f4f4f;
+}
+
+.filter_label{
+  display:block;
+     font-weight: bold;
+    text-align: center;
+    color: #4f4f4f;
+    margin-top:6px;
 }
 
 label.checkbox {
@@ -279,6 +287,28 @@ label.checkbox {
     position: absolute;
     top: 220px;
     right: 250px;
+}
+.criteria_container{
+   max-height:80%;
+  
+}
+.criteria{
+     position: relative;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #CAD8F3;
+    background: #DEE7F8;
+    padding: 1px 5px 1px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100px;
+    float: left;
+    display: inline;
+    font-size:small;
+    margin:2px;
+  
 }
 
 .measure_icon {
@@ -421,6 +451,24 @@ font-weight:bold;
     font-size: 13px;
     color:#4d4d4d;
     margin-top:5px;
+    
+}
+.filter{
+   
+flex-grow:1;
+width:25%;
+height: 100%;
+text-align:center;
+    
+}
+.advanced_search_collapsible{
+   
+height:100px;
+max-width:1440px;
+margin:0 auto;
+display:flex;
+flex-wrap:wrap;
+flex-direction:row;
     
 }
 .navigation_section:hover{
