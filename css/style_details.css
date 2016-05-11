@@ -287,15 +287,21 @@ label.checkbox {
     margin: 1px;
 }
 
-#header {
+.header {
     font-family: Lucida Sans Unicode;
     box-sizing: border-box;
     height: 80px;
-    text-align: center;
+
     background-color: #f6f6f6;
     box-shadow: 0px 6px 3px -3px rgba(0,0,0,.1);
-    max-width: 1440px;
-    margin: auto;
+
+
+}
+#header_container {
+max-width: 1440px;
+margin: auto;
+text-align: center;
+height: 100%;
 }
 #navigation_and_search_container {
 height:100%;
@@ -415,19 +421,23 @@ font-weight:bold;
     float: right;
     border-right: 1px solid;
     border-color: rgba(0,0,0,.1);
-    margin-left: 10px;
-    padding-right: 3px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-right: 2px;
+    padding-left: 2px;
     padding-top: 8px;
     font-size: 13px;
     color:#4d4d4d;
     margin-top:5px;
-    
+    color:#666666;
 }
 .navigation_section:hover{
-   
+    cursor: pointer;
     color:orange;
+    box-shadow: 0px -3px 0px orange inset;
+    padding-bottom: 7px;
 
-    
+
 }
 .toolbox {
     opacity: .7;
