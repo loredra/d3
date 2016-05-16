@@ -1,4 +1,5 @@
 
+
   var width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
   var height =d3.select("#associate_info").node().getBoundingClientRect().height;
   var IsExpanded=false;  
@@ -39,7 +40,7 @@
       if(IsExpanded==false){
       d3.select("#associate_info_node").
       style("display","none");
-      
+
    width =d3.select("#associate_info").node().getBoundingClientRect().width;
    height =d3.select("#associate_info").node().getBoundingClientRect().height;
       svg
@@ -78,19 +79,19 @@
       
       d3.select("#trustScore")
       .attr("transform","translate(570,-14)");
-      
+
       d3.select("#expand_forcelayout")
       .text("<<<");
       IsExpanded=false;
      }
-  
+
     function linkToolTip(link){
-     
-    var text=link.attr("type");      
+
+    var text=link.attr("type");
         tooltip.text(text);
 	tooltip.style("visibility","visible");
   }
-  
+
   function zoomed() {
 //     container.attr("transform", "translate(0,0 )scale(1)");
     container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
@@ -406,7 +407,7 @@
 
     link.style("stroke", function(o) {
       return o.source.index == node.index || o.target.index == node.index ? "red" : "#999"});
-    
+
     try{
       statusColor="red";
     tooltip.style("visibility", "visible");
@@ -418,11 +419,11 @@
         catch(err){
 	tooltip.style("visibility", "visible");
 	tooltip.html(node.name);
-	  
+
 	}
 	}
-    
-    
+
+
     
     /////Checkbox///////////////////////////////////////////////////////////
     d3.select("#node_check_box").on("change", change);

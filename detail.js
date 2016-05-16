@@ -2,10 +2,11 @@ var detail=d3.select("#detail_info");
 var firstLoad=true;
 var isAdvancedSearchClose=true;
 var isFirstAdvancedSearchOpen=true;
-dummyData = [   
+tooltip=d3.select(".tooltip");
+dummyData = [
 {"name":"USSDN"},
-{"name":"CFDDSAC"},
-{"name":"CSFSDADSA"},
+{"name":"Long Long Long Long one"},
+{"name":"Short"},
 {"name":"CSFDSFSS" } ];
 
 function showAdvancedSearch(){
@@ -51,7 +52,7 @@ function showAdvancedSearch(){
     .enter()
     .append("div")
     .attr("class","criteria")
-    .text(function(d){ return d.name; });
+    .text(function(d){ return "#"+d.name; });
     
      country_filter=advanced_search
     .append("div")
@@ -85,6 +86,31 @@ function showAdvancedSearch(){
       isAdvancedSearchClose=true;
       }
 }
+
+function mouseOverList(date) {
+      try{
+    tooltip=d3.select(".tooltip");
+    tooltip.style("visibility", "visible");
+    tooltip.html(
+    "Expiration Date: "+date);
+        }
+        catch(err){
+	tooltip.style("visibility", "hidden");
+
+
+	}
+
+  }
+     function mouseout(node) {
+    tooltip
+    .style("visibility", "hidden");
+    }
+
+       function mousemove(node) {
+     tooltip.style("top", (d3.event.pageY + 16) + "px")
+            .style("left", (d3.event.pageX + 16) + "px");
+}
+
 function populateDetailPage(node){
   
   //////////////////////Populate content in to detail div/////////////////// 
@@ -125,8 +151,8 @@ function populateDetailPage(node){
    
     
 
-    try {listList1=node.isListedIn;
-	
+    try
+    {listList1=node.isListedIn;
       for(i in listList1){
 	listList=listList.concat(listList1[i].Name,",");
 	
@@ -173,14 +199,22 @@ catch(err) {
 	var listOfList=d3.select("#listList").append("ul")
         .attr("class","ul_list_List")
         .selectAll("li")
-        .data(listList)
+        .data(node.isListedIn)
 	    .enter()
 	    .append("li")
 	    .attr("class","listList")
 	    .style("font-size", 15 + "px")
-	    .text(function(d){return d})
+	    .text(function(d){return d.Name})
 	    .style("text-anchor", "start")
-	    .on("click",overlay);
+	    .on("click",overlay)
+        .on("mouseover",function(d){
+           
+            if(d.Expiration!=undefined)
+            mouseOverList(d.Expiration)
+            })
+        .on("mousemove",mousemove)
+        .on("mouseout",mouseout);
+
 
 	var listOfAKA=d3.select("#listAKA").append("ul")
         .attr("class","ul_list_List")

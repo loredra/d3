@@ -294,16 +294,16 @@ label.checkbox {
 }
 .criteria{
      position: relative;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
     border: 1px solid #CAD8F3;
     background: #DEE7F8;
     padding: 1px 5px 1px 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 100px;
+    max-width: 100px;
     float: left;
     display: inline;
     font-size:small;
@@ -367,6 +367,7 @@ height:100%;
     margin-bottom: 10px;
     text-align: center;
     background-color: #f6f6f6;
+    display: none;
 }
 
 #profile_of_node {
@@ -477,6 +478,7 @@ margin:0 auto;
 display:flex;
 flex-wrap:wrap;
 flex-direction:row;
+margin-top:5px;
     
 }
 .navigation_section:hover{
@@ -503,6 +505,7 @@ flex-direction:row;
     border: 1px #d6dfe6;
     border-style: solid;
     background-color: white;
+    margin-top: 15px;
 }
 
 #measure_detail {

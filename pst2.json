@@ -11,7 +11,8 @@
 			  }],
 		  "Name":"USSDN",
 		  "Measure":["arms","technical","money"],
-		  "General Information":["This Company is really dangerous","Expiration Date is 2024", "I see death people"]
+		  "General Information":["This Company is really dangerous","Expiration Date is 2024", "I see death people"],
+          "Expiration":"23-12-2016"
 		  },
 		  {"Canadian List":[
 			  {"Name":"ETCO CANADIAN COMMODITIES Name 3",
@@ -21,10 +22,13 @@
 			   "Address":"Address221, Street221, Building 321"
 			  }]
 			  ,
-		  "Name":"Canadian List"  
+		  "Name":"Canadian List",
+          "Measure":["arms","technical","money"],
+		  "General Information":["This Company is dangerous", "Black sheep wall"],
+          "Expiration":"None"
 		  }
 		  ,
-		  {"Canadian List":[
+		  {"Canadian List 1":[
 			  {"Name":"ETCO CANADIAN COMMODITIES Name 3",
 			   "Address":"Address111, Street222, Building 333"
 			  },
@@ -35,7 +39,7 @@
 		  "Name":"Canadian List"  
 		  }
 		  ,
-		  {"Canadian List":[
+		  {"Canadian List 2":[
 			  {"Name":"ETCO CANADIAN COMMODITIES Name 3",
 			   "Address":"Address111, Street222, Building 333"
 			  },
@@ -43,10 +47,10 @@
 			   "Address":"Address221, Street221, Building 321"
 			  }]
 			  ,
-		  "Name":"Canadian List"  
+		  "Name":"Canadian List 2"
 		  }
 		  ,
-		  {"Canadian List":[
+		  {"Canadian List 3":[
 			  {"Name":"ETCO CANADIAN COMMODITIES Name 3",
 			   "Address":"Address111, Street222, Building 333"
 			  },
@@ -54,7 +58,7 @@
 			   "Address":"Address221, Street221, Building 321"
 			  }]
 			  ,
-		  "Name":"Canadian List"  
+		  "Name":"Canadian List 3"
 		  }
     
 		  ],
