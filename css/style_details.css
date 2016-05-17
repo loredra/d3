@@ -303,14 +303,16 @@ label.checkbox {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 100px;
+    max-width: 200px;
     float: left;
     display: inline;
-    font-size:small;
+    font-size:11px;
     margin:2px;
   
 }
-
+.criteria:hover{
+  max-width: 350px;
+}
 .measure_icon {
     width: 45px;
     height: 45px;
