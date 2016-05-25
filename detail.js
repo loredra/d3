@@ -143,7 +143,7 @@ function populateDetailPage(node){
 	  .append("img")
 	  .attr("class","measure_icon")
 	  .attr("width","50px")
-	  .attr("src",function(d){return d+".png"}); 
+	  .attr("src",function(d){return d+".svg"}); 
 	}
 	catch(err){
 	  }

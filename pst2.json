@@ -105,7 +105,7 @@
     {"id": "3","name":"PEREZ GUILLAMA, Osmani De La Caridad","type":"human","trust":80,"status":"Inactive"},
     {"id": "4","name":"RODRIGUEZ DELGADO, Minerva Aleida","type":"human","trust":80,"status":"Active"},
     {"id": "5","name":"WILSON GREEN PROPERTY LIMITED","type":"Company","trust":80,"status":"Active"},
-    {"id": "6","name":"WATSON, Caroline","type":"human","trust":80,"status":"Active"},
+    {"id": "6","name":"WATSON, Caroline","type":"politician","trust":80,"status":"Active"},
     {"id": "7","name":"UK GLOBAL COMMODITIES LIMITED","type":"Bank","trust":80,"status":"Active"},
     {"id": "8","name":"ALL WORLD FOODS LIMITED","type":"Company","trust":80,"status":"Active"},
     {"id": "9","name":"DA SILVA, Jose Antonio Goncalves","type":"terrorist","trust":80,"status":"Active"},
