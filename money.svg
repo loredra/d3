@@ -17,7 +17,7 @@
    inkscape:export-filename="/home/chnn/d3/money.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="New document 14">
+   sodipodi:docname="money.svg">
   <defs
      id="defs6677" />
   <sodipodi:namedview
@@ -28,8 +28,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
-     inkscape:cx="165.19226"
-     inkscape:cy="220.55274"
+     inkscape:cx="190.29564"
+     inkscape:cy="143.28646"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -37,8 +37,8 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1280"
-     inkscape:window-height="1004"
+     inkscape:window-width="1024"
+     inkscape:window-height="748"
      inkscape:window-x="-3"
      inkscape:window-y="-3"
      inkscape:window-maximized="1" />
@@ -50,7 +50,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -77,11 +77,11 @@
        sodipodi:cy="328.14285"
        sodipodi:rx="92.85714"
        sodipodi:ry="92.85714"
-       d="m -21.428574,328.14285 c 0,51.28358 -41.573557,92.85714 -92.857136,92.85714 -51.28359,0 -92.85714,-41.57356 -92.85714,-92.85714 0,-51.28358 41.57355,-92.85714 92.85714,-92.85714 51.283579,0 92.857136,41.57356 92.857136,92.85714 z"
+       d="m -21.428574,328.14285 a 92.85714,92.85714 0 1 1 -185.714276,0 92.85714,92.85714 0 1 1 185.714276,0 z"
        transform="matrix(0.94078064,0,0,0.94078064,401.8035,269.36602)" />
     <g
        id="g7447"
-       transform="matrix(0.37317474,-0.00370301,0.00795529,0.2952799,201.53284,507.40046)"
+       transform="matrix(0.37556861,-0.00372676,0.00800632,0.29717408,200.8923,507.02315)"
        style="fill:#ccffaa;stroke:#ffffff;stroke-width:9.13267708;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">
       <g
          id="g7407"
