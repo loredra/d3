@@ -9,6 +9,7 @@ dummyData = [
 {"name":"Short"},
 {"name":"CSFDSFSS" } ];
 
+// Dummy data and execution for Advanced Search
 function showAdvancedSearch(){
   if(isFirstAdvancedSearchOpen){
     advanced_search=d3.select("#main_layout").insert("div", ":first-child");
@@ -142,8 +143,7 @@ function populateDetailPage(node){
 	  .enter()
 	  .append("img")
 	  .attr("class","measure_icon")
-	  .attr("width","50px")
-	  .attr("src",function(d){return d+".svg"}); 
+	  .attr("src",function(d){return "resources/"+d+".svg";}); 
 	}
 	catch(err){
 	  }

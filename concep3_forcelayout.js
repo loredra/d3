@@ -35,14 +35,25 @@
     
   var container = svg.append("g");
   
+  function reCalculateLayoutWhenResize(){
+    if(IsExpanded==false){
+   width  = d3.select("#associate_info").node().getBoundingClientRect().width/2;
+   height = d3.select("#associate_info").node().getBoundingClientRect().height;
+   
+      svg
+      .attr("width",width)
+      .attr("height",height);
+       }
+    }
+  
     
     function expandForceLayout(){
       if(IsExpanded==false){
       d3.select("#associate_info_node").
       style("display","none");
 
-   width =d3.select("#associate_info").node().getBoundingClientRect().width;
-   height =d3.select("#associate_info").node().getBoundingClientRect().height;
+   width  = d3.select("#associate_info").node().getBoundingClientRect().width;
+   height = d3.select("#associate_info").node().getBoundingClientRect().height;
       svg
       .attr("width",width)
       .attr("height",height);
@@ -67,8 +78,8 @@
       d3.select("#associate_info_node").
       style("display",null);
       
-   width =d3.select("#associate_info").node().getBoundingClientRect().width/2;
-  height =d3.select("#associate_info").node().getBoundingClientRect().height;
+  width = d3.select("#associate_info").node().getBoundingClientRect().width/2;
+  height = d3.select("#associate_info").node().getBoundingClientRect().height;
       svg
       .attr("width",width)
       .attr("height",height);
@@ -311,7 +322,7 @@
 	var image_node=node
 	.append("image")
 	.attr("class","node_image")
-	.attr("xlink:href",function(d){return d.type+ ".svg" ;})
+	.attr("xlink:href",function(d){return "resources/"+ d.type+ ".svg" ;})
 	.attr("x",-12)
 	.attr("y",-12)
 	.attr("width", function(d) { return "24px" })
