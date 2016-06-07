@@ -26,11 +26,20 @@ uglify: {
       'dist/<%= pkg.name %>.min.js': ['<%= concat.dist.dest %>']
     }
   }
-}
+},
+ connect: {
+    server: {
+      options: {
+        port: 9001,
+	keepalive:true
+      }
+    }
+  }
 });
 
 grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-concat');
+grunt.loadNpmTasks('grunt-contrib-connect');
 grunt.registerTask('default', ['concat', 'uglify']);
 
 };;

@@ -113,12 +113,37 @@ function mouseOverList(date) {
 }
 
 function populateDetailPage(node){
+  ///Special case for changing Identification
+  
+switch (node.type) {
+  case "company":
+       d3.select("#identification_label")
+      .text("Company Register ID");
+    break;
+  case "human":
+       d3.select("#identification_label")
+      .text("Passport");
+    break;
+  case "bank":
+       d3.select("#identification_label")
+      .text("Bank ID");
+    break;
+default:
+        d3.select("#identification_label")
+      .text("Identification");
+    break;
+}
+  
+
   
   //////////////////////Populate content in to detail div/////////////////// 
-         d3.selectAll(".detail_name").remove();
-         d3.selectAll(".detail_address").remove();
+         d3.select(".detail_name").remove();
+         d3.select(".detail_address").remove();
+	  d3.select(".identification").remove();
+	 d3.select(".country").remove();
          d3.selectAll(".ul_list_List").remove();
-	 d3.selectAll(".measure_icon").remove();
+	
+	
     //////////////////////Populate content in to detail div///////////////////
     var listList="";
     var numOfList;
@@ -133,9 +158,19 @@ function populateDetailPage(node){
    detail.select("#name").append("div").text(node.name)
 	  .attr("class","detail_name")
 	  .attr("position","relative");
+	  
    detail.select("#address").append("div").text(node.address)
 	  .attr("class","detail_address")
 	  .attr("position","relative");
+	  
+   detail.select("#identification_container").append("div").text(node.Identification)
+	  .attr("class","identification")
+	  .attr("position","relative");
+	  
+    detail.select("#country_container").append("div").text(node.country)
+	  .attr("class","country")
+	  .attr("position","relative");
+	  
 	  
 	      try{
    detail.select(".measure").selectAll(".measure_icon")
