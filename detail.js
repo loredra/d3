@@ -277,7 +277,8 @@ function overlay() {
 	el = d3.select("#overlay");
 	el
 	.style("visibility",
-	  (el.style("visibility") == "visible") ? "hidden" : "visible");
+	  (el.style("visibility") == "visible") ? "hidden" : "visible")
+	.on("click",closeOverlay);;
 	
 	el.select(".close")
 	.on("click",closeOverlay);

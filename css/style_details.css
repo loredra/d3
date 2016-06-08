@@ -197,11 +197,6 @@ div.tooltip {
 }
 
 
-#submit {
-  
-}
-
-
 #search {
     padding: 5px 3px 4px 30px;
     border: 0.1em solid rgba(84, 84, 62, .2);
@@ -256,8 +251,7 @@ width: 60%;
 
 body {
     font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-    margin: 0;
-   
+    margin: 0;  
     background-color: #f6f6f6;
 }
 
@@ -325,7 +319,7 @@ label.checkbox {
 
 }
 #header_container {
-max-width: 1440px;
+max-width: 1600px;
 margin: auto;
 text-align: center;
 height: 100%;
@@ -369,7 +363,7 @@ height:100%;
 
 #profile_of_node {
     position: relative;
-    max-width: 1440px;
+    max-width: 1600px;
     height: 1px;
     margin: 0 auto;
     margin-top: 1px;
@@ -470,7 +464,7 @@ text-align:center;
 .advanced_search_collapsible{
    
 height:100px;
-max-width:1440px;
+max-width:1600px;
 margin:0 auto;
 display:flex;
 flex-wrap:wrap;
@@ -494,7 +488,7 @@ margin-top:5px;
 #associate_info {
     display: flex;
     box-sizing: border-box;
-    max-width: 1440px;
+    max-width: 1600px;
     height: 800px;
     margin: 0 auto;
     margin-bottom: 50px;

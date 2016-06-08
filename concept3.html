@@ -3,8 +3,8 @@
 <head>
 <link rel="stylesheet" type="text/css" href="css/style_details.css">
 <script type="text/javascript" src="lib/d3.min.js"></script>
-<!--<script type="text/javascript"src="colResizable-1.5.min.js"></script>-->
 </head>
+
 <body onresize="reCalculateLayoutWhenResize()">
 <div class="tooltip">Tipsy!</div>
 <div id="header" class=header>
@@ -17,10 +17,6 @@
 	      Account@pst.ag
 	  </div>
 	  <div id="search_container">
-	  
-	  <form id="searchbox" action="">
-	  <input id="search" type="text" placeholder="">	  
-	  </form>
 	   <div class=advanced_search onclick="showAdvancedSearch()">
 	  Advanced Search
 	  </div>
@@ -78,7 +74,7 @@
                 </div>
                 <div id=measure_detail class=measure_detail>
 			<div id="measure_label" class=measure_label>
-                       <label >Measured against this entity </label>
+                       <label >Measures against this entity * </label>
                         <div class=measure>
                         </div>
                  </div>
@@ -87,7 +83,7 @@
                 
                 <div id="name_and_address_container" class=name_and_address_container>
                     <div id="identification_container" class=nameandAddress>
-                     <label id="identification_label" class="name_label">Identification </label>
+                     <label id="identification_label" class="name_label">Identification  </label>
                     </div>
                     <div id="country_container" class=nameandAddress>
                      <label class="address_label">Country </label>
@@ -95,8 +91,11 @@
                 </div>
                      <div id=measure_detail class=measure_detail>
 			<div id="measure_label" class=measure_label>
-                       <label >Subcribe to this entity </label>
+                       <label>Actions </label>
                         <div class=measure>
+                       <img class=measure_icon src="resources/notify.svg"></img>
+                       <img class=measure_icon src="resources/whitelist.svg"></img>
+                       <img class=measure_icon src="resources/pdf.svg"></img>
                         </div>
                  </div>
                  </div>

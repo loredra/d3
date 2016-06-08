@@ -378,7 +378,7 @@
 //       .attr("data-legend",function(d) { return d.name})
   var trust=d3.select(".svg").append("g")
       .attr("id","trustScore")
-      .attr("transform","translate(570,-14)");
+      .attr("transform","translate(630,-14)");
       
       trust.append("rect")
       .attr("width",60*graph.level_trust.length)
@@ -395,7 +395,7 @@
       .style("fill","black")
       .style("dominant-baseline","central");
       
-           trust_draw.append("circle")
+      trust_draw.append("circle")
       .attr("r",10)
       .attr("transform",function(d,i){return "translate(10,"+25*(i+1)+")" })
       .style("fill",function(d) { return d.color});
